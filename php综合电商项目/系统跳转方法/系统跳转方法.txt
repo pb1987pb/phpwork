@@ -1,0 +1,66 @@
+
+
+  2、系统跳转方法
+在ThinkPHP中系统有2个跳转方法，分别是成功跳转和失败跳转：
+成功：
+	$this -> success(跳转提示,跳转地址,等待时间);
+失败：
+	$this -> error(跳转提示,跳转地址,等待时间);
+
+跳转提示参数必须要有，后面的地址和时间可以没有，如果没有指定跳转地址，则跳转到上一页。
+
+
+
+
+   一般的应用 ,成功是需要指定跳转页面的，而失败的话是不需要跳转的。
+   
+        eg:
+		
+		if(IS_POST)
+    	{
+    		$model = D('Goods');
+    		if($model->create(I('post.'), 1))
+    		{
+    			if($id = $model->add())
+    			{
+    				$this->success('添加成功！', U('lst'));
+    				exit;
+    			}
+    		}
+    		$this->error('添加失败！原因：'.$model->getError());
+    	}
+		
+		
+		  success 成功之后，我们一般的必须要使用  exit; 不在执行后面代码， 跳转到别的页面
+		
+		   error 错误页面的默认跳转页面是返回前一页，通常不需要设置 exit ，而且这里 还能保留 上一页表单的数据
+		
+		默认的等待时间success方法是1秒，error方法是3秒
+		
+		跳转地址是可选的，success方法的默认跳转地址是$_SERVER["HTTP_REFERER"]，error方法的默认跳转地址是javascript:history.back(-1);。
+
+
+              
+
+
+
+
+		
+		success和error方法都可以对应的模板，默认的设置是两个方法对应的模板都是：
+
+//默认错误跳转对应的模板文件'TMPL_ACTION_ERROR' => THINK_PATH . 'Tpl/dispatch_jump.tpl',
+
+//默认成功跳转对应的模板文件'TMPL_ACTION_SUCCESS' => THINK_PATH . 'Tpl/dispatch_jump.tpl',
+
+也可以使用项目内部的模板文件
+
+//默认错误跳转对应的模板文件'TMPL_ACTION_ERROR' => 'Public:error';
+
+//默认成功跳转对应的模板文件'TMPL_ACTION_SUCCESS' => 'Public:succes
+		
+		
+		
+		
+		
+		
+		

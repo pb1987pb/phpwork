@@ -1,0 +1,44 @@
+
+  create 方法 会 触发 自动验证 ，
+  
+   1，如果表单中出现了不应该出现的字段会怎样？
+   
+     比如我们在 增加的时候，本来是不需要 id 的，但是前端给我们传递了一个 很大的 id  99999999 ,如果我们
+	 
+	 不加以验证，那么等我们插入了数据库成功 ，那么问题来了 ，以后再也插不进去任意数据，以为id 已经到达上限了。
+	 
+	  那么此时我们就必须 对于 增加和 修改的字段加以限制 。
+	   
+	   
+	    在模型里面使用 $insertFields 代表增加接受字段，$updateFields 代表修改的时候接受的字段。
+		
+		protected $insertFields = array('level_name','jifen_bottom','jifen_top');
+	protected $updateFields = array('id','level_name','jifen_bottom','jifen_top');
+	
+	那么怎么验证，有什么规则，这里就必须要定义一个 ，$_validate  ，类似下面这种
+	
+		protected $_validate = array(
+		array('level_name', 'require', '级别名称不能为空！', 1, 'regex', 3),
+		array('level_name', '1,30', '级别名称的值最长不能超过 30 个字符！', 1, 'length', 3),
+    ,
+	);
+	  
+	 
+	  这里面首先要分析一下  第4个参数 ， 验证条件，那么
+	  
+	  
+	  self::EXISTS_VALIDATE 或者0 存在字段就验证（默认）   ----- 这个一般的不用 
+	  
+self::MUST_VALIDATE 或者1 必须验证    ----     如果是 必须字段，这个是一定要验证的 。
+
+self::VALUE_VALIDATE或者2 值不为空的时候验证    -- 这个一般的 可空字段验证 
+
+    
+
+
+
+
+
+
+
+

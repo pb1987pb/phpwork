@@ -1,0 +1,55 @@
+
+
+
+  1 ，修改 一个字段 ，一般的这种要带 id 去修改
+  
+  
+       $shangpinattrModel-> 
+                                         where(array('id'=>array('eq',$idArr[$count])))
+                                        ->setField('attr_value',$v1);  
+										
+	setField方法支持同时更新多个字段，只需要传入数组即可，例如：
+
+
+    $User = M("User"); // 实例化User对象
+	// 更改用户的name和email的值
+	$data = array('name'=>'ThinkPHP',
+	'email'=>'ThinkPHP@gmail.com');
+	
+	$User-> where('id=5')->setField($data);	
+	
+	
+	 2， 而对于统计字段（通常指的是数字类型）的更新，系统还提供了setInc和setDec方法。
+	 
+	 
+	        $this->where(array(
+                      'id' =>array('eq',$has['id'])
+                ))->setInc('goods_number',$firnum);     //  购物车数量 增加 
+				
+				
+				
+				$User = M("User"); // 实例化User对象
+				$User->where('id=5')->setInc('score',3); // 用户的积分加3
+				
+				$User->where('id=5')->setInc('score'); // 用户的积分加1
+				
+				$User->where('id=5')->setDec('score',5); // 用户的积分减5
+				
+				$User->where('id=5')->setDec('score'); // 用户的积分减1
+				
+				
+				
+				
+				
+			记住，这些也是更新字段，那么返回的也是影响的行数，和 sava 的判断是一样的 ，判断结果是否是 false
+	
+			$result !== false	
+				
+				
+				
+				
+				
+				
+				
+				
+				

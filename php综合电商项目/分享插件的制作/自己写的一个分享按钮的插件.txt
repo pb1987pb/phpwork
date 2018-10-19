@@ -1,0 +1,23 @@
+
+
+http://www.cnblogs.com/hooray/archive/2011/09/10/2172946.html
+
+
+　下面进入正题吧，前几天由于工作需要制作一个分享按钮，考虑到后续其他项目可能也会用到，于是就打算写成插件化，正好也给我自己的插件jquery.hooray增加一个新的功能，为了不浪费大家时间，我先把demo放出来，如果觉得能用到，或者想学是怎么制作的，那就继续往下看。（demo演示）
+
+　　既然要做成插件，那可制定性肯定要强，不能定死，比如不能把显示个数定死，不能把分享按钮排序定死等等（不过有些东西还是要定死的，太灵活了也就成不了插件了）。这里我的操作办法是……先看代码吧
+
+<div class="HRshare1">
+    <a class="hr-share-tsina"></a>
+    <a class="hr-share-tqq"></a>
+    <a class="hr-share-qzone"></a>
+    <a class="hr-share-renren"></a>
+    <a class="hr-share-baidu"></a>
+    <a class="hr-share-115"></a>
+    <a class="hr-share-tsohu"></a>
+    <a class="hr-share-taobao"></a>
+    <a class="hr-share-xiaoyou"></a>
+    <a class="hr-share-more"></a>
+</div>
+
+

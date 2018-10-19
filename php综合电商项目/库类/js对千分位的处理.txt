@@ -1,0 +1,108 @@
+
+
+https://blog.csdn.net/u010757785/article/details/62042724
+
+
+今天遇到一个问题，当时开发的时候自己给自己挖了一个坑，但是为了读数据方便，查数据的时候，用mysql做了千分位处理。结果一直测试的金额都是1000以下的，
+
+上线之后发现居然有的设置单价大于1000以上。导致前端处理的时后parentfloat数据之后只有千分位前面的数据
+
+
+/**
+ * 数字格式转换成千分位
+ *@param{Object}num
+ */
+ 
+function commafy(num){
+ 
+   if((num+"").Trim()==""){
+ 
+      return"";
+ 
+   }
+ 
+   if(isNaN(num)){
+ 
+      return"";
+ 
+   }
+ 
+   num = num+"";
+ 
+   if(/^.*\..*$/.test(num)){
+ 
+      varpointIndex =num.lastIndexOf(".");
+ 
+      varintPart = num.substring(0,pointIndex);
+ 
+      varpointPart =num.substring(pointIndex+1,num.length);
+ 
+      intPart = intPart +"";
+ 
+       var re =/(-?\d+)(\d{3})/
+ 
+       while(re.test(intPart)){
+ 
+          intPart =intPart.replace(re,"$1,$2")
+ 
+       }
+ 
+      num = intPart+"."+pointPart;
+ 
+   }else{
+ 
+      num = num +"";
+ 
+       var re =/(-?\d+)(\d{3})/
+ 
+       while(re.test(num)){
+ 
+          num =num.replace(re,"$1,$2")
+ 
+       }
+ 
+   }
+ 
+    return num;
+ 
+}
+ 
+ 
+/**
+ * 去除千分位
+ *@param{Object}num
+ */
+ 
+ 
+ 
+function delcommafy(num){
+ 
+   if((num+"").Trim()==""){
+ 
+      return"";
+ 
+   }
+ 
+   num=num.replace(/,/gi,'');
+ 
+   returnnum;
+ 
+}
+
+
+
+千分位转数字直接：$('.price').val().replace(/,/gi,'');
+
+
+
+
+
+
+
+
+
+
+
+
+
+

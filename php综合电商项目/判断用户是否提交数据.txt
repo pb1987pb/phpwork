@@ -1,0 +1,64 @@
+
+
+  只要是在 表单里面有 name 的，表单数据都会提交，
+
+   file  文件的 提交方式是在 $_FILES 数组里面的 ，如果 什么都没有上传，也是会有数组的
+
+  类似 
+
+  单个的就是
+
+  array(1) {
+  ["logo"] => array(5) {
+    ["name"] => string(0) ""
+    ["type"] => string(0) ""
+    ["tmp_name"] => string(0) ""
+    ["error"] => int(4)
+    ["size"] => int(0)
+  }
+}
+
+  我们只需要判断  $_FILES['logo']['error'] == 0  就表示可以写上传代码了。
+
+
+ array(1) {
+  ["pic"] => array(5) {
+    ["name"] => array(3) {
+      [0] => string(0) ""
+      [1] => string(0) ""
+      [2] => string(0) ""
+    }
+    ["type"] => array(3) {
+      [0] => string(0) ""
+      [1] => string(0) ""
+      [2] => string(0) ""
+    }
+    ["tmp_name"] => array(3) {
+      [0] => string(0) ""
+      [1] => string(0) ""
+      [2] => string(0) ""
+    }
+    ["error"] => array(3) {
+      [0] => int(4)
+      [1] => int(4)
+      [2] => int(4)
+    }
+    ["size"] => array(3) {
+      [0] => int(0)
+      [1] => int(0)
+      [2] => int(0)
+    }
+  }
+}
+    这个二维数组是需要去转换成一维数组的。
+
+
+ 
+
+
+
+
+
+
+
+

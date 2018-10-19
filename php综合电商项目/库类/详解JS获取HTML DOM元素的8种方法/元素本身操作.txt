@@ -1,0 +1,109 @@
+
+
+               3.1 属性
+
+id             设置或返回元素的元素的 id 属性值。
+
+title          设置或返回元素的元素的 title 内容。
+
+lang           设置或返回元素的元素内容的语言代码，很少使用
+
+dir            设置或返回元素的语言的方向，ltr，左到右；rt，右到左。很少使用
+
+className       设置或返回元素的 class 属性的值。
+
+tagName          返回元素的标签名。
+
+在 HTML 中，tagName 属性的返回值始终是大写的。
+
+
+<p id="myP" class="para" title="text" lang="en" dir="ltr">Some Text</p>
+
+var p = document.getElementById('myP');
+alert(p.id);           //"myP"
+alert(p.className);    //"para"
+alert(p.title);        //"text"
+alert(p.lang);         //"en"
+alert(p.dir);          //"ltr"
+alert(p.tagName);      //"P" 大写
+
+
+创建元素 
+
+ document.createElement()
+
+创建新元素。
+
+接收一个参数，即要创建元素的标签名。
+
+返回新创建的元素。
+
+//页面空空
+
+//写代码
+var p = document.createElement("p");    //创建 p 元素
+var pText = document.createTextNode("Some text");    //创建文本节点
+p.appendChild(pText);    //给 p 元素添加文本节点
+document.body.appendChild(p);    //给 body 元素添加 p 元素
+
+//刷新页面
+Some text
+
+
+
+getAttribute()
+
+该方法取得元素的属性。
+
+接收一个参数，即需要获得属性值的属性名称。属性名称要用引号括起来。
+
+返回指定属性的值。如果指定属性不存在，则返回 null。
+
+ <p id="myP" class="para" title="text" lang="en" dir="ltr">Some Text</p>
+
+var p =document.getElementById("myP");
+alert(p.getAttribute("id"));    //"myP"
+alert(p.getAttribute("class"));    //"para"
+alert(p.getAttribute("title"));    //"text"
+alert(p.getAttribute("lang"));    //"en"
+alert(p.getAttribute("dir"));    //"ltr"
+
+
+ setAttribute()
+
+ 该方法添加指定的属性，并为其赋指定的值。
+
+ 接收两个参数，第一个参数为要添加的属性的名称，第二个参数为要添加的属性值。属性名称和属性值都要用引号括起来。
+
+ 无返回值。
+
+<p id="myP">Some Text</p>
+
+var p =document.getElementById("myP");
+alert(p.getAttribute("class"));    //"null"
+p.setAttribute("class", "para");    //设置 class  属性并赋值 "para"
+alert(p.getAttribute("class"));    //"para"
+removeAttribute()
+
+该方法删除指定的属性。
+
+接收一个参数，希望删除指定属性的名称。属性名称要用引号括起来。
+
+无返回值。
+
+<p id="myP" class="para">Some Text</p>
+
+var p =document.getElementById("myP");
+alert(p.getAttribute("class"));    //"para"
+p.removeAttribute("class");    //移除 class  属性
+alert(p.getAttribute("class"));    //"null"
+
+
+
+
+
+
+
+
+
+

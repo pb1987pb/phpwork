@@ -1,0 +1,67 @@
+
+
+  document 获取文档信息
+   
+  title
+	 
+	 var originalTitle = document.title;    //返回当前文档的标题
+      document.title = "New title";    //修改当前文档的标题
+	  
+URL
+
+     该属性返回当前页面完整的 URL，也就是浏览器地址栏中的全部地址信息。
+
+    比如我打开了一个页面，浏览器地址栏中的信息显示如下：
+
+      http://www.cnblogs.com/cqhaibin/p/6291640.html
+
+   这些信息就是当前文档完整的 URL。
+
+   var url = document.URL;    //返回当前文档完整的URL	
+   
+ domain   该属性返回当前文档的服务器域名。
+
+          还是上面的地址，域名就是 www.cnblogs.com。  
+		  
+		  var domain = document.domain; 
+		  
+		  
+		  
+referrer   该属性包含着链接到当前文档的源页面的 URL。		  
+		  
+		   比如 A 页面上有个超链接，超链接指向 B 页面，我们在 A 页面点击了这个超链接，于是打开了 B 页面，此时，B 页面的 referrer 属性值就是 A 页面的完整 URL。
+		   
+		   但 A 页面并不是通过点击其他超链接打开的，所以 A 页面的 referrer 属性值是空字符串 ""。
+		   
+		   
+		    var referrer = document.referrer;    //返回链接到当前页面的源页面的URL
+			
+			 这个可以作为返回跳转
+			 
+lastModified
+
+                    var lastModified = document.lastModified;    //返回当前文档最后被修改的日期和时间
+                 还是以 http://www.cnblogs.com/cqhaibin/p/6291640.html 这个页面为例，在控制台输入以下代码：
+
+              document.lastModified;    //输入这行代码
+              "01/17/2017 11:58:34"    //返回的信息		
+
+
+cookie
+
+                 这个属性可以访问和设置与当前文档相关的所有 cookie。
+
+var cookie = document.cookie;    //返回与当前文档相关的所有cookie
+
+
+
+
+
+
+
+
+
+
+
+			  
+   

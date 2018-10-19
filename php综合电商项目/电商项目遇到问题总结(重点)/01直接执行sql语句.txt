@@ -1,0 +1,95 @@
+
+
+
+   //这个 replace into 可以实现同样的功能
+    //eplace into : 如果记录存在就修改，记录不存在就添加，以主键字段来判断一条记录是否存在
+
+
+          execute用于更新和写入数据的sql操作，如果数据非法或者查询错误则返回false ，否则返回影响的记录数。
+      
+    $gaModel -> execute('replace into p39_goods_attr values("'.$gaid[$_i].'","'.$v1.'","'.$k.'","'.$id.'")');
+	
+	
+
+   查询是下面这个
+
+   query方法用于执行SQL查询操作，如果数据非法或者查询错误则返回false，否则返回查询结果数据集（同select方法）。
+
+    $result=  $this->query("select * from pan_admin where md5(concat(id,'$salt')) ='$id' and md5(concat(password,'$salt')) ='$pwd'");
+	
+	
+    ***** 下面这个是防止 sql 攻击的  。
+  
+         模型的query和execute方法 同样支持预处理机制，例如：
+
+$model->query('select * from user where id=%d and status=%d',$id,$status);//
+
+或者$model->query('select * from user where id=%d and status=%d',array($id,$status)); 
+
+
+  $Model->where("id=%d and username='%s' and xx='%f'",array($id,$username,$xx))->select();// 或者
+
+$Model->where("id=%d and username='%s' and xx='%f'",$id,$username,$xx)->select();
+
+
+                %d    表示整数      s% 表示string    %f 表示 小数 
+
+
+    ***** 在实际项目中 。防止 sql 注入 也可以这样子写 ，用 exp  , 用   addslashes  来初始化 获取到的值 ，然后 拼接 sql 语句。
+	
+
+
+	    public function ajaxDel()
+    {
+        $id = addslashes(I('get.id'));
+        $goodid = addslashes(I('get.good_id'));
+		
+        // 删除商品属性之前先删除相应属性的库存量
+        $goodnumModel=D('good_number');
+        $goodnumModel-> where(
+               array(
+                   'good_id'=>array('exp', "=$goodid  and find_in_set($id,attr_list)")
+               ))->delete();
+    
+       // 删除商品本身属性
+         $shangpinattrModel=D('shangpin_attr');
+         $shangpinattrModel->where(array('id' => array('eq',$id)))->delete(); 
+        
+        
+    }
+
+
+     在 验证 自动登录的时候，我们也可以这样子去直接执行 sql 语句 
+	 
+	 
+	    //这样子使用 exp来获取到的数值
+          $user=$this->where(array(
+              ''=>array('exp',"md5(concat(id,'$salt')) ='$id' and md5(concat(password,'$salt')) ='$pwd'")
+          ))->find();
+		  
+		  
+		  
+		  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 
+
+
+
+

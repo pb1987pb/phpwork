@@ -1,0 +1,60 @@
+
+
+   数组分为 索引数组和关联数组
+	 
+	  通过元素的位置作下标，就是索引数组。
+	  
+	    $stu=array('tom','alia');
+		
+          echo $stu[0],'<br>',$stu[1]
+	
+	  关联数组,键值对。
+	  
+	  $stu=array('name'=>'李白','sex'=>'男','age'=>20);
+	  echo $stu['name'],'<br>',$stu['sex'],'<br>',$stu['age']
+	  
+	 数组声明：
+	   
+	    方法一：
+		
+		  $stu=array('tom','alia');
+		或者  $stu=array('name'=>'李白','sex'=>'男','age'=>20);
+		
+		方法二：  这种更好  。
+		$stu[]="tom";
+		$stu[]="alia";
+
+
+	 
+	  在php中输出数组的具体元素可以通过下标的形式输出：$array[key]。
+	  
+关于数组在模版中输出的语法格式：  这个是模板中的 
+
+	支持中括号形式：{$array[key]}
+	
+	支持点形式：{$array.key}
+
+	
+	 两种形式在输出的效果上没有什么区别，所以在实际开发的时候，两种任意一种都可以使用。
+	 
+	 
+	==========  二维数组
+
+  	  $stu=array(
+	  array('tom1','alia1'),
+	  array('tom2','alia2'),
+	  array('tom3','alia3')
+	  );
+	  
+	  中括号形式和.形式都可以
+	   $stu[0][0] = tom1
+	   
+	   $stu.0.0 = tom1
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  

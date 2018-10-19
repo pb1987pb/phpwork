@@ -1,0 +1,18 @@
+
+
+   hasChildNodes()
+
+如果指定的节点有子节点，该方法返回 true，若没有子节点，则返回 false。
+
+<input id="btn" type="button" value="Button" />
+<ul id="words">
+    <li>新年快乐</li>
+    <li id="ruyi">万事如意</li>
+    <li>最后祝你新年大吉吧</li>
+</ul>
+
+var btn = document.getElementById("btn");    //获得对 id="btn" 的引用
+var words = document.getElementById("words");    //获得对 id="words" 的 ul 元素的引用 
+
+alert(btn.hasChildNodes());    //"false"
+alert(words.hasChildNodes());    //"true"

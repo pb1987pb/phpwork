@@ -1,0 +1,68 @@
+
+
+ 
+   模版常量替换机制
+在实际开发的时候会出现一个这样的问题：在引入图片、css、js文件的时候，往往需要写一些比较复杂的路径，
+
+所以这个时候我们比较希望能有一些特殊的常量将很长很复杂的路径简单化，这个时候可以考拉使用模版常量替换的机制。
+
+在ThinkPHP中系统默认给我们提供以下几个常用的模版常量：
+__MODULE__：表示从域名后面开始一直到分组名结束的路由
+
+__CONTROLLER__：表示从域名后面开始一直到控制器结束的路由
+
+__ACTION__：表示从域名后面开始一直到方法名结束的路由
+
+__PUBLIC__：站点根目录下的Public目录的路由
+
+__SELF__：表示从域名后面开始一直到路由的最后（如果没有参数，则__SELF__和__ACTION__所表达的内容是一样的）
+
+
+在ThinkPHP中“模版常量”是通过模版内容替换机制来实现的，并非是常量的定义。替换机制可以查看行为文件ContentReplace.Behaviour.class.php
+
+  $replace =  array(
+            '__ROOT__'      =>  __ROOT__,       // 当前网站地址
+            '__APP__'       =>  __APP__,        // 当前应用地址
+            '__MODULE__'    =>  __MODULE__,
+            '__ACTION__'    =>  __ACTION__,     // 当前操作地址
+            '__SELF__'      =>  __SELF__,       // 当前页面地址
+            '__CONTROLLER__'=>  __CONTROLLER__,
+            '__URL__'       =>  __CONTROLLER__,
+            '__PUBLIC__'    =>  __ROOT__.'/Public',// 站点公共目录
+        );
+		
+		
+		那么如果自己感觉这些常量不够使用，可以自己去设置其他的
+		
+		  为什么能设置 ，因为下面这段方法
+		  
+		   // 允许用户自定义模板的字符串替换
+        if(is_array(C('TMPL_PARSE_STRING')) )
+            $replace =  array_merge($replace,C('TMPL_PARSE_STRING'));
+        $content = str_replace(array_keys($replace),array_values($replace),$content);
+		
+		  怎么设置 ？  TMPL_PARSE_STRING 是固定的写法，不能更改
+		  
+		   //设置模板常量
+		  'TMPL_PARSE_STRING' => array(
+    	'__ADMIN__'       =>  __ROOT__./Public/Admin
+    ),
+		
+		  那么也可以在  html中直接使用了 。 __ADMIN__
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+

@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style>
+        
+.hr-share-16 a{display:block;width:18px;height:16px;background:url(HRico_16x16.png) no-repeat;float:left;cursor:pointer}
+.hr-share-16 a:hover{opacity:0.8}
+.hr-share-16 a.hr-share-more{background-position:0 0}
+.hr-share-16 a.hr-share-tsina{background-position:0 -16px}
+.hr-share-16 a.hr-share-tqq{background-position:0 -32px}
+.hr-share-16 a.hr-share-qzone{background-position:0 -48px}
+.hr-share-16 a.hr-share-renren{background-position:0 -64px}
+.hr-share-16 a.hr-share-baidu{background-position:0 -80px}
+.hr-share-16 a.hr-share-115{background-position:0 -96px}
+.hr-share-16 a.hr-share-tsohu{background-position:0 -112px}
+.hr-share-16 a.hr-share-taobao{background-position:0 -128px}
+.hr-share-16 a.hr-share-xiaoyou{background-position:0 -144px}
+.hr-share-16 a.hr-share-hi{background-position:0 -160px}
+.hr-share-16 a.hr-share-fanfou{background-position:0 -176px}
+.hr-share-16 a.hr-share-sohubai{background-position:0 -192px}
+.hr-share-16 a.hr-share-feixin{background-position:0 -208px}
+.hr-share-16 a.hr-share-youshi{background-position:0 -224px}
+.hr-share-16 a.hr-share-tianya{background-position:0 -240px}
+.hr-share-16 a.hr-share-msn{background-position:0 -256px}
+.hr-share-16 a.hr-share-douban{background-position:0 -272px}
+.hr-share-16 a.hr-share-twangyi{background-position:0 -288px}
+.hr-share-16 a.hr-share-mop{background-position:0 -304px}
+    </style>
+</head>
+
+<body>
+
+    
+<div class="HRshare1">
+    <a class="hr-share-tsina">我的</a>
+    <a class="hr-share-tqq">我的</a>
+    <a class="hr-share-qzone">我的</a>
+    <a class="hr-share-renren">我的</a>
+    <a class="hr-share-baidu">我的</a>
+    <a class="hr-share-115">我的</a>
+    <a class="hr-share-tsohu">我的</a>
+    <a class="hr-share-taobao">我的</a>
+    <a class="hr-share-xiaoyou">我的</a>
+    <a class="hr-share-more">我的</a>
+</div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+
+        var shareico = {
+            "tqq": "http://v.t.qq.com/share/share.php?title={title}&url={url}&appkey=118cd1d635c44eab9a4840b2fbf8b0fb",
+            "tsina": "http://service.weibo.com/share/share.php?title={title}&url={url}&source=bookmark&appkey=2992571369",
+            "qzone": "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&title={title}",
+            "renren": "http://***/share/buttonshare.do?link={url}&title={title}",
+            "baidu": "http://cang.baidu.com/do/add?it={title}&iu={url}&fr=ien#nw=1",
+            "115": "http://sc.115.com/add?url={url}&title={title}",
+            "tsohu": "http://t.sohu.com/third/post.jsp?url={url}&title={title}&content=utf-8",
+            "taobao": "http://share.jianghu.taobao.com/share/addShare.htm?url={url}",
+            "xiaoyou": "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url={url}",
+            "hi": "http://apps.hi.baidu.com/share/?url={url}&title={title}",
+            "fanfou": "http://fanfou.com/sharer?u={url}&t={title}",
+            "sohubai": "http://bai.sohu.com/share/blank/add.do?link={url}",
+            "feixin": "http://space3.feixin.10086.cn/api/share?title={title}&url={url}",
+            "youshi": "http://www.ushi.cn/feedShare/feedShare!sharetomicroblog.jhtml?type=button&loginflag=share&title={title}&url={url}",
+            "tianya": "http://share.tianya.cn/openapp/restpage/activity/appendDiv.jsp?app_id=jiathis&ccTitle={title}&ccUrl={url}&jtss=tianya&ccBody=",
+            "msn": "http://profile.live.com/P.mvc#!/badge?url={url}&screenshot=",
+            "douban": "http://shuo.douban.com/!service/share?image=&href={url}&name={title}",
+            "twangyi": "http://t.163.com/article/user/checkLogin.do?source={title}&info={title}+{url}&images=",
+            "mop": "http://tk.mop.com/api/post.htm?url={url}&title={title}"
+        };
+        var shareiconame = {
+            "tqq": "腾讯微博",
+            "tsina": "新浪微博",
+            "qzone": "QQ空间",
+            "renren": "人人网",
+            "baidu": "百度收藏",
+            "115": "115",
+            "tsohu": "搜狐微博",
+            "taobao": "淘江湖",
+            "xiaoyou": "腾讯朋友",
+            "hi": "百度空间",
+            "fanfou": "饭否",
+            "sohubai": "搜狐白社会",
+            "feixin": "飞信",
+            "tianya": "天涯社区",
+            "youshi": "优士网",
+            "msn": "MSN",
+            "douban": "豆瓣",
+            "twangyi": "网易微博",
+            "mop": "猫扑推客"
+        };
+
+
+        $("div").addClass("hr-share-16");  //加样式
+
+        //取到了当前页面的标题和链接
+        var title = document.title;
+        var url = window.location.href;
+
+
+        // 
+        function eFunction(str) {
+            console.log('进来了');
+            return function () {
+                window.open(formatmodel(shareico[str], { title: title, url: url }));
+            }
+        }
+
+        // 下面这个是注册事件 ,
+        //下面是一个for循环，这里就是实现了循环绑定点击事件的效果。这里需要注意两点：一，因为我是写成插件，所以页面上可能不止一处用到分享按钮，为了防止重复事件绑定，所以我在绑定每个事件前都用die去解除绑定；二，我用的是live，而不是bind，因为我担心可能有的项目里的分享插件是通过ajax在页面载入完毕之后再载入进来的，所以我绑定就直接用live绑定了。
+        for (si in shareico) {
+            //$(".hr-share-" + si).live('click', eFunction(si)).attr("title", "分享到" + shareiconame[si]);
+
+            $(".hr-share-" + si).on('click', eFunction(si)).attr("title", "分享到" + shareiconame[si]);
+
+        }
+
+
+         // 换绑定的方法
+        function formatmodel(str, model) {
+            for (var k in model) {
+                var re = new RegExp("{" + k + "}", "g");
+                str = str.replace(re, model[k]);
+            }
+            return str;
+        }
+
+    </script>
+</body>
+
+</html>

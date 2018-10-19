@@ -1,0 +1,78 @@
+
+
+
+   加入我们在页面设置了 静态页面缓存 
+   
+     这个一般设置在 Home 控制器，也就是主要是前端的 
+	 
+	 
+	  <?php
+return array(
+	//'配置项'=>'配置值'
+        'HTML_CACHE_ON'     =>    true, // 开启静态缓存',在开发
+    'HTML_CACHE_TIME'   =>    60,   // 全局静态缓存有效期（秒）
+    'HTML_FILE_SUFFIX'  =>    '.shtml', // 设置静态缓存文件后缀
+    // 这个是哪个模块生成静态页
+    'HTML_CACHE_RULES'  =>   array(  
+        'Index:index' =>   array('index', 86400),//首页生成index.shtml一天的时间
+        'Goods:detail' =>  array('good-{id}', 86400),//首页生成index.shtml一天的时间
+        )
+);
+
+
+  // 但是在这里有一个雪崩的问题 ，
+  
+  
+  如果网站的并发量在100【每秒有100个刷新】，在缓存页面失效的一瞬间，100个并发同时进入到后端数据库有可能让数据库崩溃。
+解决TP中静态缓存的雪崩问题：【生成静态缓存页时加锁，在缓存失效时只让一个客户端进入控制器】
+
+
+    那么具体的操作就是 创建一个 文件锁 ，这里是
+	
+	 在 tp 框架的 Behavior 下面的  ReadHtmlCacheBehavior.class  下面的 run 方法 。
+	 
+	   首先在外面放一个  变量    $tp=null;
+	 
+	 
+	    public function run(&$params){
+        // 开启静态缓存
+        if(IS_GET && C('HTML_CACHE_ON'))  {
+            $cacheTime = $this->requireHtmlCache();
+            if( false !== $cacheTime && $this->checkHTMLCache(HTML_FILE_NAME,$cacheTime)) { //静态页面有效
+                // 读取静态页面输出
+                echo Storage::read(HTML_FILE_NAME,'html');
+                exit();
+            }
+            //如果静态页面不存在，那么就在这里面加一个锁 ,这个锁必须是全局的。
+            global $tp;
+            $tp=  fopen('./read_html_cache.lock', 'r');
+            flock($tp, LOCK_EX);  //  只要一个客户端可以通过这个阻塞
+               //   再次判断一下
+               if( false !== $cacheTime && $this->checkHTMLCache(HTML_FILE_NAME,$cacheTime)) { //静态页面有效
+                // 读取静态页面输出
+                echo Storage::read(HTML_FILE_NAME,'html');
+                exit();
+            }
+           
+            
+        }
+    }
+	 
+	   测试  ，打开 cmd
+	     把  C:\phpStudy\PHPTutorial\Apache\bin  下面的 ab.exe 文件拖到  cmd 命令  
+		 
+		 
+		 
+		 C:\Users\Administrator>C:\phpStudy\PHPTutorial\Apache\bin\ab.exe -c 20 -n 20   
+		 
+		 
+		 
+		 那么这样子测试是可以的 。
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 

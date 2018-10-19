@@ -1,0 +1,109 @@
+
+ 1,  substr(字符串，开始位置，截取长度);截取字符串 ，起始位置是负数，表示从结尾向前数，开始 -1,长度省略表示截取到结尾。  
+ 
+  应用：  在类加载的时候截取 
+	
+  substr($class_name, -5)=='Model'
+  substr($class_name, -10)=='Controller'
+  substr($class_name, -3)=='Lib'
+
+   长度如果是  负数   ，那就表示有几个不截取
+
+      应用 ：获取 表名 ，表的名字不要后面的 5 个字符串 ，就是去掉  Model 
+
+         //获取当前操作的表名
+    private function getTable(){
+        return substr(get_class($this),0,-5);  
+    }
+
+  
+  2，strrchr(字符串,匹配的字符串)   ，区别找这个字符串最后一次出现的位置作为匹配点
+      strchr(字符串,匹配的字符串)  ，区别找这个字符串第一次出现的位置作为匹配点
+	  
+	  strchr() 函数搜索字符串在另一字符串中的第一次出现，并返回字符串的其余部分（从匹配点）。
+	  
+	  如果未找到所搜索的字符串，则返回 FALSE。
+	  
+	  应用：获取文件的后缀名 ，以最后一个 '.' 出现的位置作为匹配点.
+	  
+	    $ext = strrchr($file_info['name'], '.'); //  .jpg
+		
+  3,str_repeat(重复字符串,重复次数)  重复字符串
+     
+
+      应用： 在分类层级,树形结构展示的时候，重复几个空格  echo str_repeat('&nbsp;',$deep*4);
+	  
+   4,trim()、 函数移除字符串两侧的空白字符或其他预定义字符。
+
+          4.1 去空格 
+             $a="  ab ";
+           dump(trim($a));  //结果string(2) "ab"  
+           
+          4.2 移除字符串两侧的字符（"Hello" 中的 "He" 以及 "World" 中的 "d!"）
+                 $str = "Hello World!";
+              dump(trim($str,"Hed!")); //string(8) "llo Worl"
+         
+
+     ltrim() - 移除字符串左侧的空白字符或其他预定义字
+
+   
+     rtrim() - 移除字符串右侧的空白字符或其他预定义字符
+
+        去掉右侧的 ","
+
+           $str = "Hello,World,";
+         dump(rtrim($str,",")); //  string(11) "Hello,World"
+
+   
+   5,strpos(字符串，查找字符串) ,查询到了返回位置索引，查询不到返回 false
+   
+      应用：  在匹配数据库爱好等集合类型，判断 'best'字符串是否在  'best,new,hot'  中 .
+	  
+	    echo strpos($goods_info['status'],'best')!==false?'checked':''
+		
+		 
+	  
+	6,  	implode(连接字符，数组)：别名是join()，将数组的值连接成字符串
+
+             	explode(分割字符，字符串)：将字符串分割成数组
+
+	
+	
+	7，strtolower(),字符串都转小写
+	
+	   strtoupper(),字符串都转大写
+	   
+	  strtolower($code)==strtolower($_SESSION['code'])
+	  
+	8，strlen() 以字节为单位  ,它实际上是拿到的编码之后存储的值，在uft字符集编码后 "康复" 就是6个字节。 
+	    
+                   str_len('ab')   2
+		
+                str_len('康复')  6
+		
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  

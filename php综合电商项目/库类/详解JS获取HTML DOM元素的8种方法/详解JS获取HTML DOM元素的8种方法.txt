@@ -1,0 +1,131 @@
+
+
+       获取html的方法（document.documentElement）
+   document.documentElement是专门获取html这个标签的。
+   
+             获取body的方法（document.body）
+   document.body是专门获取body这个标签的。
+             
+			  但是这里有一个问题  如果页面加了<!DOCTYPE html>
+			   
+			      document.body.scrollTop一直是0 ，那么此时用 document.documentElement
+				  
+				     /*判断回到顶部按钮显示与否*/
+  window.onscroll=function(){
+   var sTop = document.documentElement.scrollTop;
+ if(sTop>100){
+   document.getElementById("sm_top").style.display="block";
+ }else{
+   document.getElementById("sm_top").style.display="none";
+ }
+ }
+		     
+
+   1,通过ID获取（getElementById）
+   
+      document.getElementById('id')
+	  
+	  
+	    1.上下文必须是document。
+        2.必须传参数，参数是string类型，是获取元素的id。
+        3.返回值只获取到一个元素，没有找到返回null。
+		
+	2,通过类名（getElementsByClassName）
+  
+       	 1.上下文可以是document，也可以是一个元素。
+         2.参数是元素的类名。
+         3.返回值是一个类数组，没有找到返回空数组。
+		  2.IE8以及以前版本不兼容。真可惜这么好用的方法不兼容。
+		  
+   3,通过选择器获取一个元素（querySelector） ，这个方法不兼容IE7以及以前版本，现在似乎也没有考虑IE7兼容的公司了。
+   
+       1.上下文可以是document，也可以是一个元素。
+        2.参数是选择器，如："div .className"。 指定一个或多个匹配元素的 CSS 选择器。 可以使用它们的 id, 类, 类型, 属性, 属性值等来选取元素。
+        3.返回值只获取到一个元素。
+		  
+		         获取文档中id为demo的第一个元素：                 document.querySelector("#demo");  
+														   
+		       获取文档中第一个 <p> 元素：                   document.querySelector("p");     
+			   
+		       获取文档中 class="example" 的第一个元素:      document.querySelector(".example");
+			   
+			    获取文档中 class="example" 的第一个 <p> 元素:  document.querySelector("p.example");
+			   
+			    获取文档中有 "target" 属性的第一个 <a> 元素：  document.querySelector("a[target]");
+		
+    4，通过选择器获取一组元素（querySelectorAll），同querySelector，不兼容IE7。 相当于用 $
+	
+	  用法同querySelector类似：
+      1.上下文可以是document，也可以是一个元素。
+       2.参数是选择器，如："div .className"。
+         3.返回值是一个类数组。
+
+		
+			   
+			   
+			   
+		
+   5,通过标签名（getElementsByTagName）
+  
+      document.getElementsByTagName('p');
+      var oDiv = document.getElementById('divId');
+        oDiv.getElementsByTagName('p');
+		
+		1.上下文可以是document，也可以是一个元素，注意这个元素一定要存在。
+     2.参数是是获取元素的标签名属性，不区分大小写。
+     3.返回值是一个类数组，没有找到返回空数组。
+	 
+	 
+	  接下来在讲一下为什么有的方法只能在document上使用。
+	  
+	  
+	   拿div举栗子，div是HTMLDivElement类的一个实例，document是HTMLDocument 的实例。
+	   
+	   他们的继承关系：
+HTMLDivElement > HTMLElement > Element > Node > EventTarget
+
+HTMLDocument > Document > Node > EventTarget
+
+我们都知道子类继承父类，子类就可以使用父类的属性和方法。
+
+他们相同的继承关系是Node和EventTarget，也就是说他们都可以使用Node和EventTarget上的方法。
+
+如Node上的nodeName、parentNode等，和EventTarget上的addEventListener等。
+	  
+	  
+	  getElementById只在Document类的原型上，HTMLDivElement 没有继承Document类，所以div不能使用getElementById方法。
+	  
+      getElementsByTagName即在Document类的原型上也在Element类的原型上，所以div和document都可以使用getElementsByTagName方法。
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

@@ -1,0 +1,67 @@
+
+
+PHP判断一个数组中是否有的键值为空？包括多维判空
+
+https://www.cnblogs.com/wydchn/articles/4952293.html
+
+
+如果判断一个二维数组可以这样，同时干掉那些空的：   
+
+$this->dataObj->getTotalScore(&$resultinfo,$uids);
+        $judge = implode("",$resultinfo);
+        if(!empty($judge))//数组不为空
+        {  //去掉数组键值为空
+          foreach($resultinfo as $key =>$getoutvisnull)
+          {
+            if(empty($getoutvisnull))
+            {
+              unset($resultinfo[$key]);
+            }
+          }
+          $allscorearray[] = $resultinfo;
+        }
+		
+		
+		QQ群有哥们用下面函数来做这个事情：
+		
+		function array_null($arr){
+    if(is_array($arr)){
+     foreach($arr as $k=>$v){
+      if($v&&!is_array($v)){
+        return false;
+      }
+       $t=array_null($v);
+       if(!$t){
+         return false;
+       }
+     }
+     return true;
+     }else{
+       if(!$arr){
+         return true;
+       }
+       return false;
+     }
+  }
+  
+  
+  $node=array(array(),array(),array(array()));
+  if(array_null($node)){
+    echo "fdsa";
+  }
+  
+  用正则：
+
+ 
+
+if (trim(preg_replace("/(\w+\s*=>\s*)?array\s*\(|\),\s+|\)$/i","",var_export($arr,true)))){
+    echo 'true';
+} else {
+    echo "false";
+}
+  
+  
+  
+  
+  
+  

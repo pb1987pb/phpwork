@@ -1,0 +1,51 @@
+
+ 1,判断对象是否是空对象
+ 
+   Object.keys(prods)  这个方法得到的就是这个 prods对象所有的 key 的数组。判断这个数组的长度是否为零，就看是不是空对象。
+   
+    Object.keys(prods).length === 0
+	
+	2，删除对象里面的某一项，就是找到key,然后删除
+
+
+    var o={'name':'jam'};
+
+    var isTrue=delete o.name;
+	
+  3,重置一个对象
+
+     比如一个对象 var k={a:"123",b:"456",c:null,d:"",e:{},f:123}
+
+          那么 我们不希望简单粗暴的 var k=null
+
+              我们希望 的是 重置  ，也就是是数字的我们重置成 0 ,是字符串的重置成 '' 这样子的
+
+               {a:"",b:"",c:null,d:"",e:{},f:0}
+
+            这里使用的是一个方法  Object.assign();
+          
+                           这种是直接把k 当做目标函数转换了，源数据都不会改变，目标函数会改变
+                             var k={a:"123",b:"456",c:null,d:"",e:{},f:123}
+
+                        Object.assign(k,{a:"",b:"",c:null,d:"",e:{},f:0})
+                        
+                     也可以 把k当做源数据，那么k不会改变，得到的是一个新的对象。，如果此时想改变 k  是这个新对象，必须对 k进行重新赋值
+
+                         var k={a:"123",b:"456",c:null,d:"",e:{},f:123}
+
+                       k=Object.assign({},k,{a:"",b:"",c:null,d:"",e:{},f:0})
+
+                  
+  4，拷贝一个对象 。
+     
+var obj = { a: 1 };
+var copy = Object.assign({}, obj);
+console.log(copy);
+
+
+
+
+
+
+
+

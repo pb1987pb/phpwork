@@ -1,0 +1,87 @@
+
+1.将字符串超出指定长度部分隐藏
+
+/*
+将字符串以指定长度显示，多余部分以省略号显示（len--显示长度
+defaultStr--若字符串为空显示的字符串）
+*/
+String.prototype.splitString = function (len, defaultStr) {
+  var result = "";
+  var str = this.toString();
+  if (str) {
+    str = str.trim()
+    if (str.length > len) {
+      result = str.substring(0, len) + "...";
+    }
+    else {
+      result = str;
+    }
+  }
+  else {
+    result = defaultStr;
+  }
+  return result;
+}
+
+2,将数字型字符串补全指定长度
+
+//给数字型字符串固定指定长度
+String.prototype.addZero = function (n) {
+  var num = this
+  var len = num.toString().length;
+  while (len < n) {
+    num = '0' + num;
+    len++;
+  }
+  return num;
+}
+
+看注释可能有点不理解 其实就是假如这个字符串是 "2"，通过这个扩展方法 可以这么操作 "2".addZero(2)
+
+那么返回过来的就是"02"这样的字符串。
+
+4.将数据库DateTime类型转换为Date
+
+String.prototype.DTD = function () {
+  return new Date(Date.parse(this.toString().replace(/-/g, "/")))
+}
+ 5.用户昵称省略　
+
+//用户昵称省略，保留第一个和最后一个，其他的都用 **** 代替。
+ String.prototype.telHide = function () {
+   var name = this
+   return name.substr(0, 1) + "****" + name.substring(name.length - 1, name.length)
+ }
+
+
+// 去掉字符左端的的空白字符
+String.prototype.LeftTrim = function()
+{
+    return this.replace(/(^[\\s]*)/g, "");
+}
+// 去掉字符右端的空白字符
+String.prototype.RightTrim = function()
+{
+    return this.replace(/([\\s]*$)/g, "");
+}
+// 去掉字符两端的空白字符
+String.prototype.Trim = function()
+{
+    return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+// 判断字符串是否以指定的字符串开始
+String.prototype.StartsWith = function(str) 
+{
+    return this.substr(0, str.length) == str;
+}
+
+// 判断字符串是否以指定的字符串结束
+String.prototype.EndsWith = function(str) 
+{
+    return this.substr(this.length - str.length) == str;
+}
+
+
+
+

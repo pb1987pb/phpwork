@@ -1,0 +1,19 @@
+
+
+  创建表的语法
+  
+  create table p39_goods
+(
+	id mediumint unsigned not null auto_increment comment 'Id',
+	goods_name varchar(150) not null comment '商品名称',
+	market_price decimal(10,2) not null comment '市场价格',
+	primary key (id),
+	key promote_price(promote_price),
+	key promote_start_date(promote_start_date),
+
+)engine=InnoDB default charset=utf8 comment '商品';
+
+   在表创建之后在增加的语法
+   
+   alter table pan_goods add primary key (id)
+   alter table pan_goods add index promote_price(promote_price);

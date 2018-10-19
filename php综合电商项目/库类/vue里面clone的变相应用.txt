@@ -1,0 +1,57 @@
+
+
+  clone在 js里面很常见，那么在vue里面就不是很常见。
+  
+               <ul >
+                            <li v-for='(iteam,index) in typaArr' :key="index">
+                                <a href="#" v-if="iteam.atrr_type!=1" @click="add(iteam)">{{iteam.textfuhao}}</a>
+                                         <span> {{iteam.attr_name}}:</span>
+                                <span v-if="iteam.attr_input_type==1"> <input type="text" name="id[{{iteam.id}}]"/></span>
+                                <span v-else-if="iteam.attr_input_type==2"> 
+                                    <select  name="id[{{iteam.id}}]">
+                                        <option v-for='(iteam1,index1) in iteam.attr_value' :key="index1">
+                                            {{iteam1}}
+                                        </option>
+                                    </select>
+                                </span>
+                                  <span v-else-if="iteam.attr_input_type==3"> 
+                                      <textarea  name="id[{{iteam.id}}]"></textarea>
+                                </span>
+              
+                           
+                            </li>
+                            
+                        </ul>
+						
+						
+						点击 a的时候 clone一个li出来 。
+						
+						methods:{
+      add(iteam){   
+         var index=this.typaArr.indexOf(iteam);
+         if(iteam.textfuhao=='+'){
+             var iteamnew=Object.assign({},iteam); // 克隆这个对象
+              iteamnew.textfuhao='-';
+          
+          this.typaArr.splice(index+1,0,iteamnew);//在数组里面更新它
+         }else{
+              this.typaArr.splice(index,1); 
+         }
+         
+
+          
+          
+      }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

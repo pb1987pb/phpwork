@@ -1,0 +1,56 @@
+
+
+   在ThinkPHP中系统封装好了一个变量的分配方法，这个方法叫做assign。具体语法：
+	$this -> assign(‘模版中变量名’,$php中的变量名);
+
+	
+	  $this->assign('name',$value);// 下面的写法是等效的$this->name = $value;
+	  
+ assign方法必须在display和show方法之前调用，并且系统只会输出设定的变量，其它变量不会输出（系统变量例外），
+	  
+	  一定程度上保证了变量的安全性。
+	  
+	  如果要同时输出多个模板变量，可以使用下面的方式：
+
+   $this->assign(array(
+                        'levelData' => $levelData,
+			'_page_title' => '添加商品',
+			'_page_btn_name' => '商品列表',
+			'_page_btn_link' => U('lst'),
+		));
+		
+		
+   传递一个数组，或者下面这样子也可以
+		 
+		 $array['name']    =    'thinkphp';
+		 $array['email']   =    'liu21st@gmail.com';
+		 $array['phone']   =    '12335678';
+		 
+		 $this->assign($array);
+		 
+		 在模板中怎么使用 ？
+		 
+		   如果是用 原生的 php语法 ，就是 <?php echo $name;?>
+		   
+		            <?php echo $name.'['.$email.''.$phone.']';?>
+					
+				，
+
+在ThinkPHP中默认的展示基本变量方法如下：
+
+	{$模版中的变量名}
+
+		 
+		可以使用： {$name} [ {$email} {$phone} ] 输出同样的内容。
+
+
+    当然 ，这个默认的变量左右分割符是{}，其实可以被更改的，可以在配置文件中找到具体的配置项：
+
+  然后可以自己修改 {} 变量分隔符 。	
+		 
+		 
+		 
+		 
+		 
+		 
+		 

@@ -1,0 +1,44 @@
+
+ 1,指定字段 
+   $Model->field('id,title,content')->select();   ==  SELECT id,title,content FROM table
+   
+  2，指定字段别名
+
+  $Model->field('id,nickname as name')->select();    ==   SELECT id,nickname as name FROM table  
+   
+   
+   可以在field方法中直接使用函数，例如：
+   
+      $Model->field('id,SUM(score)')->select();     SELECT id,SUM(score) FROM table
+	  
+	  
+	  ***** 下面的这三个是等效的。
+	  
+	  $Model->select();
+	  $Model->field()->select();
+	  $Model->field('*')->select();
+	  
+	  
+	  字段排除
+	  
+	  如果我希望获取排除数据表中的content字段（文本字段的值非常耗内存）之外的所有字段值，我们就可以使用field方法的排除功能，
+	  
+	  例如下面的方式就可以实现所说的功能：
+
+$Model->field('content',true)->select();
+
+则表示获取除了content之外的所有字段，要排除更多的字段也可以：
+
+$Model->field('user_id,content',true)->select();
+
+//或者用$Model->field(array('user_id','content'),true)->select();
+
+  
+
+
+
+
+
+
+
+

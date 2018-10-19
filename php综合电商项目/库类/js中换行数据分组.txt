@@ -1,0 +1,48 @@
+
+
+  类似这样子的标准换行  ， \r\n 
+  
+   "attr_value":"28\r\n29\r\n30\r\n31\r\n32\r\n33\r\n34"
+   
+   "attr_value":"\u9ed1\u8272\r\n\u767d\u8272\r\n\u7d2b\u8272\r\n\u7ea2\u8272"
+   
+      也有这样子不是很规则的
+	  
+	   "attr_value":"\u54c8\u54c81 \r\n \u54c8\u54c82 \r\n\r\n \u54c8\u54c83 \u54c8\u54c8 4 \u54c8\u54c8 5"
+	  
+	  
+	  
+	  
+	   那么在拿到这个数值之后，我们可以把它转换为数组。
+	   
+	    在 js 里面是 这个样子的 。
+		
+		
+		 attr_value.split(/[(\r\n)\r\n]+/)
+
+
+                那么其实在得到这个数组的时候 ，我们严谨一点，还必须去掉这个数组里面每一项的空格
+
+                 li+=val.replace(/(^\s*)|(\s*$)/g, "");  就是去掉左右两边空格的 。
+
+
+         else if(v.attr_input_type==2){
+            console.log(v.attr_value);
+            li+="<select><option value=''>请选择</option>";
+           var _attr =v.attr_value.split(/[(\r\n)\r\n]+/); //换行符隔开获取数组
+           console.log(_attr);
+           _attr.forEach(function(val,ind){
+                li+="<option value=''>";
+                li+=val.replace(/(^\s*)|(\s*$)/g, "");
+            li+="</option>"
+        });
+        li+="</select>"
+        }
+
+
+
+
+
+
+
+

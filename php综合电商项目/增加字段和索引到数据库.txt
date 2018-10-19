@@ -1,0 +1,73 @@
+
+
+
+promote_price decimal(10,2) not null default '0.00' comment '促销价格',
+	promote_start_date datetime not null comment '促销开始时间',
+	promote_end_date datetime not null comment '促销结束时间',
+	is_new enum('是','否') not null default '否' comment '是否新品',
+	is_hot enum('是','否') not null default '否' comment '是否热卖',
+	is_best enum('是','否') not null default '否' comment '是否精品',
+	is_floor enum('是','否') not null default '否' comment '是否推荐楼层',
+	sort_num tinyint unsigned not null default '100' comment '排序的数字',
+	
+	
+	key promote_price(promote_price),
+	key promote_start_date(promote_start_date),
+	key promote_end_date(promote_end_date),
+	key is_new(is_new),
+	key is_hot(is_hot),
+	key is_best(is_best),
+	key sort_num(sort_num),
+	
+	
+	假如我们需要在 表中增加这些字段，那么我们就需要这样子写
+	
+	
+	  Alter table 表名 add [column] 字段名 数据类型 [列属性] [位置];
+	  
+	  
+	alter table pan_good_category add promote_price decimal(10,2) not null default '0.00' comment '促销价格',
+	
+	alter table pan_good_category add promote_price decimal(10,2) not null default '0.00' comment '促销价格',
+	
+	
+	加字段
+	
+	alter table pan_goods add promote_price decimal(10,2) not null default '0.00' comment '促销价格';
+	alter table pan_goods add promote_start_date datetime not null comment '促销开始时间';
+	alter table pan_goods add promote_end_date datetime not null comment '促销结束时间';
+	alter table pan_goods add is_new enum('是','否') not null default '否' comment '是否新品';
+	
+	alter table pan_goods add is_hot enum('是','否') not null default '否' comment '是否热卖';
+	alter table pan_goods add is_best enum('是','否') not null default '否' comment '是否精品';
+	alter table pan_goods add is_floor enum('是','否') not null default '否' comment '是否推荐楼层';
+	alter table pan_goods add sort_num tinyint unsigned not null default '100' comment '排序的数字';
+	
+	
+	
+	
+	加普通索引   alter table pan_goods add index
+	
+	
+	alter table pan_goods add index promote_price(promote_price);
+	alter table pan_goods add index promote_start_date(promote_start_date);
+	alter table pan_goods add index promote_end_date(promote_end_date);
+	alter table pan_goods add index is_new(is_new);
+	alter table pan_goods add index is_hot(is_hot);
+	alter table pan_goods add index is_best(is_best);
+	alter table pan_goods add index sort_num(sort_num);
+	
+	
+    最后 可以查询  结果  ，是否 字段和索引都成功了 
+	
+	   show create table pan_goods
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

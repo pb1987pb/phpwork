@@ -1,0 +1,65 @@
+
+
+  /*
+ *  上传单张图片和生成缩略图
+ *  @param array $imgArr  单行图片信息，类似 $_FILES[$imgName]
+ *  @param array $dirName  文件夹文字，比如商品图片，'goods'
+ *  @param array $thumb 缩略图的尺寸，类似下面这种
+ *                    array(
+				array(500, 500),
+				array(300, 300),
+			))
+ * @return array  缩略图和原图的路径
+ */
+        function uploadOne($imgArr, $dirName, $thumb = array())
+{
+		$ic = C('IMAGE_CONFIG'); //获取配置的信息，这里面就是对上传图片的一些限制
+		
+		//关于上传图片的一些配置
+     // 'IMAGE_CONFIG'           =>array(
+//        'maxSize' => 1024*1024,  //限制 最大大小
+//    	'exts' => array('jpg', 'gif', 'png', 'jpeg'),  // 限制类型
+//        'rootPath'          => './Public/Uploads/', //相对服务器根目录地址
+//        'viewPath'          => '/Public/Uploads/'  //相对网站根目录地址，网站用的。
+//    )
+		$upload = new \Think\Upload(array(
+			'rootPath' => $ic['rootPath'],
+			'maxSize' => $ic['maxSize'],
+			'exts' => $ic['exts'],
+		));// 实例化上传类
+		$upload->savePath = $dirName . '/'; // 图片二级目录的名称
+		// 上传文件 
+                $info   =   $upload->uploadOne($imgArr);
+		if(!$info)
+		{
+			return array(
+				'ok' => 0,
+				'error' => $upload->getError(),
+			);
+		}
+		else
+		{
+			$ret['ok'] = 1;
+			  // 单图片上传成功了，这个就是第一种原图 路径 ， $info是有9个属性的一维数组
+			  // 其中的  savepath 类似于 Good/2018-10-13/   ，注意这个后面是 有 / 的  
+			  //  savename 类似于 5b2e292fcf5d4.png
+			  
+                     $ret['images'][0] = $logoName = $info['savepath'] . $info['savename'];
+		    // 判断是否生成缩略图
+		    if($thumb)
+		    {
+		    	$image = new \Think\Image();
+		    	// 循环生成缩略图
+		    	foreach ($thumb as $k => $v)
+		    	{
+				   //  先搞出缩略图的 路径 ，这个也是从 $dirName . '/'开始的 
+		    		$ret['images'][$k+1] = $info['savepath'] . 'thumb_'.$k.'_' .$info['savename'];
+					
+		    		// 打开要处理的图片 ，打开和保存的时候，这里记住都需要 是相对于 服务器的地址 。
+				    $image->open($ic['rootPath'].$logoName);  //打开原图的地址
+				    $image->thumb($v[0], $v[1])->save($ic['rootPath'].$ret['images'][$k+1]);
+		    	}
+		    }
+		    return $ret;
+		}
+}

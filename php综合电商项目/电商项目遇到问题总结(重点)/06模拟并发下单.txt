@@ -1,0 +1,32 @@
+
+
+   订单  单都是提交了一段HTML协议的字符串
+
+ 模拟的时候需要模拟几个数据
+ 
+    1， 登录的数据，就是需要携带 cookie
+	
+	   cookie 里面有很多数据，我们一般的只需要 携带 PHPSESSID 就可以
+	   
+	   
+	    PHPSESSID=m2s1lk740l1rh5mgfm0rm1m6n7;
+		
+   2，模拟提交表单数据		
+   
+    Form Data
+     shr_name:测试的名字
+shr_province:北京
+shr_city:东城区
+shr_area:西二旗
+shr_address:测试的详细地址
+shr_tel:17665238176
+
+   在模拟的时候，我们提交的是  用 & 相连接的 字符串
+   
+   
+   3，在模拟的时候， 不能清空购物车的数据 ，清空的话后面的人就不能买 
+   
+     下面是模拟的具体命令。
+   
+    C:\Users\Administrator>C:\phpStudy\PHPTutorial\Apache\bin\ab.exe -c 20 -n 20 -C "PHPSESSID=m2s1lk740l1rh5mgfm0rm1m6n7" -p C:/phpStudy/PHPTutorial/WWW/shop/order.txt 
+	-T "application/x-www-form-urlencode" http://www.shop.com/index.php/Home/Order/add.html

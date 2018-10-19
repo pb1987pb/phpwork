@@ -1,0 +1,64 @@
+
+  	protected $insertFields = array('username','password','repassword','chkcode');
+	protected $updateFields = array('id','username','password','repassword');
+	protected $_validate = array(
+		array('username', 'require', '用户名不能为空！', 1, 'regex', 3),
+                array('username', '', '用户名已经存在！', 1, 'unique', 3),
+		array('username', '1,30', '用户名的值最长不能超过 30 个字符！', 1, 'length', 3),
+		array('password', 'require', '密码不能为空！', 1, 'regex', 1), 
+                array('repassword', 'require', '确认密码不能为空！', 1, 'regex', 1), 
+                array('repassword','password','确认密码不正确',0,'confirm')
+                
+	);
+        
+		===========================
+		
+		
+        // 下面这个必须要注意，必须使用 public，要不然的在登录的控制器里面是访问不到这个字段的。
+        public $_login_validate  = array(
+		array('username', 'require', '用户名不能为空！', 1, 'regex', 3),
+		array('password', 'require', '密码不能为空！', 1, 'regex', 1), 
+                array('chkcode', 'require', '验证码不能为空！', 1, 'regex', 1), 
+                array('chkcode','check_verify','验证码错误',1,'callback')
+                
+	);
+        
+        // 验证验证码是否正确
+        function check_verify($code,$id = ''){
+            $verify = new \Think\Verify();
+            return $verify->check($code,$id);
+        }
+		
+		
+		************** 下面是实际的使用场景**************************
+		
+		       if(IS_POST)
+    	{
+    		
+    		if($model->validate($model->_login_validate)-> create())
+    		{
+    			if($model->checkLogin(I('post.member')))
+    			{
+    				$this->success('登录成功！', U('Index/index'));
+    				exit;
+    			}
+    		}
+    		$this->success('登录失败！原因：'.$model->getError());
+                exit;
+    	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

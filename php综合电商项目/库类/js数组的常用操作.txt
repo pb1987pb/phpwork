@@ -1,0 +1,111 @@
+
+ 1，length   计算数组的长度
+ 
+    var arr = ["aaa","bbb"];
+    alert(arr.length);
+	
+ 2,indexOf   返回指定元素的位置，若元素不存在返回-1
+    
+     var arr = ["aaa","bbb",111];
+   alert(arr.indexOf("aaa");//弹出0
+   alert(arr.indexOf("111");//弹出-1,"111"与111是不同的元素	
+   
+ 3,concat   原数组不会变化，要变化要重新赋值给原数组   把当前数组与另一个数组连接起来，并返回新的元素，原来的数组不被改变，concat可以接收任意个元素和数组，
+ 
+ 并把数组拆开放入新的数组中   
+     var arr = ["a","b","c"];
+alert(arr.concat([1,2,3]));//数组arr不变，返回["a","b","c",1,2,3]
+alert(arr.concat([1,2,[3,4]]));//返回["a","b","c",1,2,3,4]
+
+
+ 4，join   数组变字符串 ，将数组中的每一个元素用指定的字符串连接起来，返回字符串
+ 
+     var arr = ["a","b","c"];
+    alert(arr.join(","));//返回a,b,c
+	
+	5， map    原数组不会改变 ，返回的是新数组。
+	
+	  对数组中的每一项运行函数，返回函数运行结果组成的数组，函数的参数是一个函数，而该函数接收三个参数：数组当前值，数组索引、数组
+	  
+	  var arr = [1,2,3,-1];
+alert(arr.map(function(x) {
+      return x * x;
+}
+));//返回1,4,9,1
+	
+	
+	 6，filter  原数组不会改变
+	 
+	  这个基本你上是过滤的功能， 对数组中的每一项运行函数，返回该函数返回true的元素组成的数组
+	 
+	 var arr = [1,-3,2,-4,-6];
+var newArr = arr.filter(function(x){
+    if(x>=0){
+        return true;
+    }else{
+        return false;
+    }
+})
+alert(newArr)//返回1,2
+	
+	
+	7，toLocaleString
+	
+	该方法返回一个数组值以逗号分隔的字符串，与toString不同的是数组的每一项调用的是toLocaleString
+	
+	var arr = [1,2];
+alert(arr.toLocaleString());//返回1,2
+	
+	
+	 8，toString
+	 该方法返回由数组中每个值的字符串以逗号分隔而拼接的字符串，数组的每一项调用的是toString
+
+var arr = [1,2];
+alert(arr.toString());//返回1,2
+
+    9，unshift 注意原数组会变成
+	
+	在数组头部添加若干元素，返回添加元素后数组的长度
+
+var arr = [1,2,3];
+alert(arr.unshift("a","b"));//返回数组的长度5
+
+ 10、shift 注意原数组会变成
+删除数组头部的第一个元素，并返回被删除的元素，若数组为空则返回undefined
+
+var arr = [1,2,3];
+alert(arr.shift());//返回头部被删除的项1
+
+  11、pop  原数组也会改变
+删除数组末尾最后一个元素，返回被删除的元素，若数组为空则返回undefined
+
+var arr = [1,2,3];
+alert(arr.pop());//返回被删除的元素3
+var arr1 = [];
+alert(arr1.pop());//返回undefined
+
+ 12、push 原数组也会改变
+向数组末尾添加若干元素，返回添加元素后数组的长度
+
+var arr = [1,2];
+alert(arr.push('a','b'));//返回数组的长度2
+
+ 13， splice  会改变原数组
+ 
+  从指定位置删除若干元素，然后再从该位置添加若干元素，结果返回被删除的元素，第一个参数表示起始删除的位置，第二个参数表示要删除元素的个数，之后的元素表示要添加的元素
+  
+  var arr = ["a","b","c"];
+alert(arr.splice(1,2,"d","e"));//从位置1开始删除2个元素,在1位置添加"d","e"两个元素，返回"b","c"
+ 
+ alert(arr);//arr数组变为a,d,e
+ 
+ 
+ alert(arr.splice(0,3));//从位置0开始，删除3个元素，返回"a","d","e"
+alert(arr);//arr数组为空
+ 
+ 
+ 
+ 
+ 
+	
+	

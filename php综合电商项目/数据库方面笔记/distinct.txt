@@ -1,0 +1,55 @@
+
+
+   distinct 只能在  select 中使用  ，去重 
+   
+     1,只针对一列的使用   最常见 
+	 
+	  select distinct xx from person
+	  
+	 2, 对多列进行操作  
+	 select distinct xx1,xx2 from person
+	 
+	  这里要注意几个问题：1，  distinct  不是应用于后面的一个字段，是所有的字段
+	  
+	                      2，distinct 只能放在最前面   select xx1,distinct xx2 from person  是错误的。
+						  
+		3，针对 null 的处理
+
+              distinct 对 null 是不进行过滤的。
+
+     4，对整列的 去重用 *		
+
+          select distinct * from person	 
+		  
+		  
+	******* 针对第二种出现的问题的解决办法 
+	
+	   distinct 和别的函数在一起使用的时候，是没有位置限制的
+	   
+	   
+	   select xxx1,count(distinct xx) from person
+	   
+	   那么对于 在多列有 歧义的问题 ，我们可以使用 分组 ，然后 group_concat 函数来排除 ，但是这个函数在 mysql 4.1 以上才支持。
+	   
+	   
+	   那么我们还有一个办法 ，就是下面的这个
+	   
+	   
+	   select xxx1,xx,count(distinct xx) from person
+	   
+	     这个就是 对单列出重 ，但是是多列显示的 ，就是多了一列 conunt 数据 。
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	    

@@ -1,0 +1,78 @@
+
+
+   
+	   商品分类一页显示八条，共16条数据，显示两页，但是如果是18条数据呢？那就要前两页8条，第三页两条数据。
+	   
+这就是FCC社区里大名鼎鼎的猴子吃香蕉问题
+
+一个数组，有n条数据，每隔m条数据分成一个新数组，若有剩余数据，则也加入一个新数组里，
+
+最后将所有的新数组以数组形式输出。如数组=[1,2,3,4]，则n=4，m=2，结果为[[1,2],[3,4]];数组=[1,2,3,4,5],
+
+则n=5,m=2,结果为[[1,2],[3,4],[5]]
+
+     有两个方法
+	 
+	  1， 这个是比较笨的方法，但是是有效果的。
+	  
+	    var mybody=response.body;     //mybody为要处理的数组，每隔8个分为一个新数组
+		
+		 var num=parseInt(mybody.length/8);    //num为mybody里含有几个长度为8的数组
+		 
+		   var category=[];           //最后要输出的数组
+        var arr=[];            //将mybody分为若干个arr，最终将所有的arr加入category
+		
+		   for(var i=0;i<num;i++){
+           arr=[];
+          for(var h= 0;h<8;h++){
+            arr.push(mybody[i*8+h]);
+          }
+          category.push(arr);
+        }
+		
+		 arr=[];
+        if(num*8<mybody.length){        //如果mybody不是8的倍数，循环剩下的个数
+          for(var k=num*8;k<mybody.length;k++){
+              arr.push(mybody[num*8+k]) 
+          }
+          category.push(arr);
+        }
+        this.category=category;
+		
+		2，第二个方法 ，是比较简单的 ,res 是要处理的数组 ，最后得到的就是我们需要的数组  foodArr
+		
+		
+		 let resLength = res.length;
+       		let resArr = [...res]; // 返回一个新的数组
+       		let foodArr = [];
+    		for (let i = 0, j = 0; i < resLength; i += 8, j++) {
+    			foodArr[j] = resArr.splice(0, 8);
+    		}
+    		this.foodTypes = foodArr;
+		
+		
+		
+		 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

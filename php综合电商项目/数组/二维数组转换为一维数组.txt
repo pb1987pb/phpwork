@@ -1,0 +1,32 @@
+
+
+ 1，在 商品 价格 的时候 ，查询出来的是是 一个二维数组 。但是在 商品显示出来的 时候，此时
+ 
+    因为 
+	
+	
+	     //获取当前id对应的会员价格
+       $priceModel=D('memberPrice');
+       $priceData=$priceModel->field('level_id,price')->where(
+               array(
+                   'good_id' => array('eq',$id)
+               ))->select();
+
+			    // 二维数组转换为一维数组。
+       foreach ($priceData as $k => $v){
+           $newData[$v['level_id']]=$v['price'];
+       }
+	   
+	   
+	     <!-- 会员价格 -->
+            <table style="display:none;" width="90%" class="tab_table" align="center">
+            	<tr>
+                    <td>
+                     <?php foreach($levelData as $k => $v): ?>
+                    
+                     <p><?php echo $v['level_name']; ?>：￥  <input style='padding-left:20px;' name="price[<?php echo $v['id']; ?>]" type='text' size="20"
+                                                                  value="<?php echo $newData[$v['id']]; ?>"></p>
+                     <?php endforeach; ?>
+                    </td>
+                </tr>
+            </table>

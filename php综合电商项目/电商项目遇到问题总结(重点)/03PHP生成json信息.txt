@@ -1,0 +1,62 @@
+
+
+
+  过php生成json信息  ，前端接收的 dataType 都是 json  
+
+
+  json_encode(数组/对象)------------>生成json信息
+
+json_encode(关联数组)---->json对象
+
+json_encode(索引数组)---->js数组
+
+json_encode(索引关联数组)---->json对象
+
+json_encode(对象)---->json对象
+
+
+
+   // 会员控制器，控制登录，注册的 
+	public function ajaxChkLogin()
+	{
+		if(session('m_id'))
+			echo json_encode(array(
+				'code' => 1,
+				'username' => session('m_username'),
+			));
+		else 
+			echo json_encode(array(
+				'code' => 0
+                               
+			));
+	}
+	
+	    前端返回的就是 json对象 ，可以直接使用 。
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

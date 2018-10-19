@@ -1,0 +1,120 @@
+
+    //   钩子 函数  建议   这两个 参数 都用  引用 传递   &$data, &$option
+	
+	
+	_before_insert(&$data, $option) //插入前
+
+_after_insert($data, $option) // 插入后
+
+_before_update(&$data, $option) // 修改前
+
+_after_update($data, $option) // 修改后
+
+_before_delete($option)//删除前
+
+_after_delete($option)   // 删除后
+
+	
+
+ 1,  protected function _before_insert(&$data, $option)
+ 
+      在这个里面是没有 id 的   ,  $data 代表的是 create之后的数据。
+
+        此时   $option 也没有 where，因为添加数据也没有 where
+              ["table"] => string(9) "p39_brand"
+               ["model"] => string(5) "Brand"
+	  
+ 2，protected function _after_insert($data, $option)
+
+       $id = $data['id'];
+
+    在这个里面就是插入成功之后 ，获取id 的 方式 一般是  $data['id']  ，这个就是新添加的记录的id
+
+                同样的此时 $option 没有变化 
+				
+				  ["table"] => string(9) "p39_brand"
+                  ["model"] => string(5) "Brand"
+
+
+
+  3,protected function _before_update(&$data, $option)    修改之前
+
+      $id = $option['where']['id'];  // 要修改的商品的ID
+
+      但是这个  要注意 ， 在修改的时候 ，这个 id必须要是我们在表单能 拿到的 name="id"，一般放在 隐藏域 里面。
+
+      	<input type="hidden" name="id" value="<?php echo $data['id']; ?>" />	  
+		
+		
+		
+		
+
+   4， protected function _before_delete($option)  这个id 一般是在参数里面传递过来的 。
+
+            $id = $option['where']['id'];   // 要删除的商品的ID   
+
+            
+     那么 从 这里 我们 可以看出  其实   在修改 和删除的时候 ，这个 where 其实是一个数组
+	 
+	        就是要修改或者删除的条件
+			
+			   'where' => array(
+			       'id'   =>  1      // 这种模式
+			      );
+			 
+			 那么 	其实    我们 可以 在这些 钩子 里面去 构建 这个条件
+			 
+			 
+			     也就是我们 可以 在这里 对这个进行 重新 赋值
+				 
+				   
+			   $option['where']['id']=array('eq',100);   //等于 100 
+			   
+			    $option['where']['id']=array('in','1,5,8');   // id 在 1,5 ，8 
+
+           那么我们 可以  在这些 钩子函数 里面改变这些条件 ，很好的去解决很多问题。
+
+
+        注意  ；这里有一个  问题  ，想要  修改   钩子函数里面的 参数 ，因为 这两个参数都是 数组
+
+      是  值 传递  ， 单独修改 $data, $option  的值 ， 不是 修改的 TP 框架  所用的   $data, $option  的值 ，
+	  
+	    所用  ，我们 在 修改   $data 或者  $option  的值的时候 必须 在前面 加上 &  ,应用传递 。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		   
+			   
+			   
+			   
+			   
+			   
+			   
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	    
+
+     

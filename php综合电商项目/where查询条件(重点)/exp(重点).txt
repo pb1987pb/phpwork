@@ -1,0 +1,77 @@
+
+
+ exp 表达式
+ 
+ 
+ exp 不是一个运算符，而是一个综合表达式以支持更复杂的条件设置。 exp的操作条件不会被当成字符串，可以
+ 
+ 
+ 使用任何 sql 支持的语法，包括使用函数和字段名称 。
+ 
+ 
+   $map['id'] = array('exp','in(1,3,8)');
+   
+   
+    在这里面有一个很 经典的用法
+	
+	扩展：如何查询出一个字段中带某一个字符的：可以使用FIND_IN_SET函数：如以下找出attr_list里带4的：
+	
+	   good_id      goods_number       attr_list 
+	   
+	    11           132                 3,5
+		11           123                 1,5
+		11           555                3,4
+		12           123                14,44
+		13           324               28,31
+		
+	可能 有人会想 	 attr_list  包含 4 ,是不是 包含 ",4," ,但是这里是第一个和 尾部的4就查询不出来了。
+	
+	 
+	    当然 第二种思路 ：   在 attr_list  前面和后面都加上 ","  然后在判断 ",4," 在不在里面就可以了 。
+		
+		          LOCATE(substr,str):返回子串substr在字符串str第一个出现的位置，如果substr不是在str里面，返回0.
+		
+		  select * from test where LOCATE(',4,',concat(',',attr_list,','))    这样子是可以查询出来的  
+		
+		
+		第三种思路 ，把 attr_list 用,分割成数组 ，看 4是否在其中   ,这个 比较复杂 ，mysql中没有 直接分割的 函数，
+		
+		  需要自己写存储过程 。
+		  
+		  
+		  第 4种思路， 用 find_in_set 函数 。
+		  
+		   select * from test where find_in_set(4,attr_list)
+		  
+		  
+		 但是 这些 在 php中怎么写
+		 
+		 
+		     $findresult =    $shangpinattrModel->where(
+			                                 array(
+											 
+                                             'good_id'=>array('exp', "=$goodsId or and find_in_set($gaid,attr_list)")
+                                         
+                                             ))
+                                         ->select();
+		  
+	 
+	        在实际项目里面可以尝试使用 。
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	
+	

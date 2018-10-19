@@ -1,0 +1,61 @@
+
+
+
+ 1)字段独立原则
+select * from emp where  empno=1325467;  //empno条件字段独立
+select * from emp where  empno+2=1325467; //empno条件字段不独立
+只有独立的条件字段才可以使用索引
+
+
+
+
+2) 左原则
+模糊查询，like    %   _
+   %：关联多个模糊内容
+   _: 关联一个模糊内容
+select * from 表名  like  “beijing%”;  //使用索引
+select * from 表名  like  “beijing_”;  //索引索引
+
+查询条件信息在左边出现，就给使用索引
+XXX%    YYY_  使用索引
+%AAA%   _ABC_   %UUU 不使用索引
+
+
+3) 复合索引
+ename复合索引 内部有两个字段（ename，job）
+① ename(前者字段)作为查询条件可以使用复合索引
+② job(后者字段)作为查询条件不能使用复合索引
+
+复合索引的第一个字段可以使用索引：
+ select * from 表名  where ename like  “beijing%”; 
+复合索引的其余字段不能使用索引：
+ select * from 表名  where job like  “beijing%”; 
+如果第一个字段的内容已经确定好，第二个字段也可以使用索引：
+
+ select * from 表名  where ename like  “beijing%” and job like  “beijing%”; 
+
+
+
+ OR原则
+OR左右的关联条件必须都具备索引 才可以使用索引：  ename  和 job  都是单独索引  
+
+select * from 表名  where ename like  “beijing%” or job like  “beijing%”
+
+
+or的左右，只有一个有索引，导致整体都没有的使用：ename 是单独索引 ， job  不是索引 ，导致都不是索引
+
+select * from 表名  where ename like  “beijing%” or job like  “beijing%”
+
+
+
+
+
+
+
+
+
+
+
+
+
+

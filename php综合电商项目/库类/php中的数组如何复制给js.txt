@@ -1,0 +1,20 @@
+
+
+  在 js 中，特别是使用 vue的情况下 ，后台传递过来的数组就很重要，那么此时我们就需要 js接受 php
+  
+   传递到前台的数据，然后用 vue去渲染。
+   
+   
+     var obj    =eval('<?php echo json_encode($attrmesDate);?>');
+	 
+	 
+	 json_encode(数组/对象)------------>生成json信息
+json_encode(关联数组)---->json对象
+json_encode(索引数组)---->js数组
+json_encode(索引关联数组)---->json对象
+json_encode(对象)---->json对象
+
+
+  上面  $attrmesDate 是一个查询出来的 二维索引数组 。
+  
+      那么 此时得到的就是 一个 js 的 二维索引数组 .......

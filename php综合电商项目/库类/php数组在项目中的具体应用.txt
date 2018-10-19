@@ -1,0 +1,113 @@
+
+  1，array_merge()数组合并，可以用于数组更新。
+  
+   案例：在类的构造函数里面把我们自己传递的 array 和本身定义的 array合并，起到一个更新数组的作用。
+     这个主要是一维数组的应用。
+        public function __construct($config=array()){
+        $this->config   =   array_merge($this->config, $config);
+    }
+	
+1、	如果是字符串下标，后面的元素将前面的元素覆盖
+	
+	下面两句话的意思就是 下标是 整数 的情况 ，不管是重复还是不重复，都不会元素覆盖，都会重新建立索引。
+
+2、	如果在整数下标，重新建立下标索引（）
+
+3、	这个可以传递单个整数下标的数组，也会重建索引。
+
+	
+	
+	
+  2，in_array($v['id'],$chilldren)	,判断 一个数 是否在数组中
+  
+      
+  3，数组去重  array_unique()	   添加扩展分类的时候需要去重 ，然后判断是否是 空 
+  
+  
+          eg:      $catArr=I('post.cat_id');
+                  $catArr=array_unique($catArr);
+  
+     array(7) {
+  [0] => string(0) ""
+  [1] => string(2) "22"
+  [2] => string(2) "22"
+  [3] => string(2) "22"
+  [4] => string(0) ""
+  [5] => string(0) ""
+  [6] => string(2) "19"
+}
+array(3) {
+  [0] => string(0) ""
+  [1] => string(2) "22"
+  [6] => string(2) "19"
+}
+
+
+        4 ，数组翻转输出
+
+  /**
+			 * 方法二、先反转数组再foreach，反转函数：array_reverse($catPath);
+			 */
+			
+			// 倒的循环输出
+			$count = count($catPath);
+			for($i=$count-1; $i>=0; $i--): ?>
+				<a href=""><?php echo $catPath[$i]['cat_name']; ?></a> > 
+			<?php endfor; ?>
+			<?php echo $info['goods_name']; ?>
+
+
+      5， 数组的综合操作
+
+
+      public function displayHistory($id)
+         {
+            //首先获取cookie的值,有值就反序列化成数组。
+            $oldData=cookie('historyGood')?unserialize(cookie('historyGood')):array();
+            
+             array_unshift($oldData,$id); //先增加
+             $oldData=  array_unique($oldData);  //去重，先增加在去重，可以保证后面看的永远更新
+       
+            //数组只需要前六个,多余6个，就把最后一个去掉
+            if(count($oldData)>6){
+                $oldData=array_slice($oldData,0,6); //从第0个索引开始，取6个值
+            }
+            // 数组存回cookie,保存一个月浏览记录有效
+            cookie('historyGood',serialize($oldData),3600*24*30);
+           
+            
+            $oldData=  implode(',', $oldData);
+            // 解决 查询中的 in和结果不一致的问题
+           $hisData= $this->where(array(
+                'id' => array('in',$oldData),
+                 'is_on_sale' => array('eq','是'),
+            ))->order("field(id,$oldData)")->select();
+                  return $hisData;
+         }
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

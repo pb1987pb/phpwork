@@ -1,0 +1,85 @@
+
+
+ 1, 所有的 php 文件最终都会加载在内存里面，
+ 
+   就是我们的一个 请求 ，会把index.php加载到内存，然后在执行代码过程中，  开始都会把 需要的 文件类的啊 ，方法  加载 到 
+   
+   这个 index.php内存中 ，所有 这里面 类也好，方法也好 ，遇到相对路径，那此时都是 以 这个 index.php 为相对点的，但是在 tp框架
+   
+   里面要注意，一般的不要 以 index.php 为相对路径，英文 pathinfo路由 会认为  index  操作方法是它的当前目录
+   
+     也就是   类似  http://www.shop.com/index.php/Home/Index  是当前目录，而不是我们开始认为的  http://www.shop.com    这个是当前目录  ，这个是需要注意的 
+   
+ 。
+   
+   
+   2，一旦发给客户端形成了 html 文件 ，那么此时 ，客户端 看见加载的 图片啊 ，js文件啊 ，css文件啊 ，这些
+   
+   是 发送的什么请求呢 ？
+   
+        那么一般我们的请求 是    http://www.shop.com/
+		
+		      实际上是走了默认的 平台，默认的 控制器，默认的 方法 ，也就是 访问的是下面的这个  
+			   
+			  http://www.shop.com/index.php/Home/Index/index   ，那么此时 pathinfo 会认为
+			  
+			    http://www.shop.com/index.php/Home/Index 是 index.php的目录，那么在 请求的时候，我们需要的是下面这个
+				
+			  那么请求 js 文件，css文件，图片，请求 的是什么
+			  
+			  
+			  Request URL:http://www.shop.com/Home/Public/img/top_2.gif
+			  
+			   
+			  所有此时我们就不能使用相对目录，我们必须使用网站根目录 ，也就是  http://www.shop.com ，在html中是  '/'
+			  
+			  我们在html中也会去使用 根目录 ，一般就写成  /Home/Public/img/top_2.gif     根目录下面的什么什么文件就可以
+			  
+			   所有在 html中我们建议写 / 作为根目录。
+			   
+			   
+			   此时 css 已经下载完了，但是在这里我们发现，css里面还有图片的请求 。
+			   
+			   background: url(../img/inputbg.gif) repeat-x left top;
+			   
+			   
+			   类似于这种 ，在 .css文件里面的图片 我们应该怎么写路径 
+			   
+			     此时我们有两种写法  
+				 
+            第一相对根目录  ：background:url(/Home/Public/img/inputbg.gif) 这种在后期文件夹调整很麻烦  ,因为这个也是 html，那么也是会知道这个
+
+                   / 所代表的的含义是 网站根目录 ，
+
+
+			
+			 第二相对于 本身的 css 目录  ，也就是上面的   background: url(../img/inputbg.gif) repeat-x left top; 这个就可以。
+			   
+			   
+			   这个更好，是先去下载css，然后在去下载 图片 ，用相对路径更好 。
+			   
+			   
+			   
+			   
+			   
+			   
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  

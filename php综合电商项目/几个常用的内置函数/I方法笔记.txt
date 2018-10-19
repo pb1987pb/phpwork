@@ -1,0 +1,155 @@
+
+
+
+  ThinkPHP 中 I() 是获取变量值，可以通过这个方法，对变量进行验证，从而保证了数据的可靠性。
+  
+
+  I('变量类型.变量名/修饰符',['默认值'],['过滤方法或正则'],['额外数据源'])
+  
+  
+   过滤方法：是对ThinkPHP默认提供的htmlspecialchars的补充，函数名可以是php内置的，也可以是函数库中的。
+   
+  
+ 在PHP中获取变量值的方法有很多，比如：$_GET['变量名']，$_POST['变量名']，$_SESSION['变量名']，$_COOKIE['变量名']，$_SERVER['变量名'] 都可以获取相应的变量值
+ 
+  但在thinkphp中为了安全的原因建议统一使用 I 函数来获取变量值。
+  
+    获取 URL 地址栏中参数 id 的值，在php中我们用 $_GET['id'] 来获取，在thinkphp中我们可以用 I('get.id') 来获取。
+	
+	                               同样的， $_POST['id'] 就用 I('post.id') 取代  
+ 
+  I 函数的语法格式中的变量类型
+  
+get	获取GET参数
+
+post	获取POST参数
+
+param	自动判断请求类型获取GET、POST或者PUT参数
+
+request	获取REQUEST 参数
+
+put	获取PUT 参数
+
+session	获取 $_SESSION 参数
+
+cookie	获取 $_COOKIE 参数
+
+server	获取 $_SERVER 参数
+
+globals	获取 $GLOBALS参数
+
+path	获取 PATHINFO模式的URL参数
+
+data	获取 其他类型的参数，需要配合额外数据源参数
+
+
+注意：变量类型不区分大小写。
+      变量名则严格区分大小写。
+      默认值和过滤方法均属于可选参数。
+
+我们以GET变量类型为例，说明下I方法的使用：
+
+echo I('get.id'); // 相当于 $_GET['id']
+echo I('get.name'); // 相当于 $_GET['name']
+
+支持默认值：
+
+echo I('get.id',0); // 如果不存在$_GET['id'] 则返回0
+echo I('get.name',''); // 如果不存在$_GET['name'] 则返回空字符串
+
+支持直接获取整个变量类型，例如：
+
+// 获取整个$_GET 数组I('get.'); 用同样的方式，我们可以获取post或者其他输入类型的变量，例如：
+
+I('post.name','','htmlspecialchars'); // 采用htmlspecialchars方法对$_POST['name'] 进行过滤，如果不存在则返回空字符串
+
+I('session.user_id',0); // 获取$_SESSION['user_id'] 如果不存在则默认为0
+
+I('cookie.'); // 获取整个 $_COOKIE 数组
+
+I('server.REQUEST_METHOD'); // 获取 $_SERVER['REQUEST_METHOD'] 
+
+
+param变量类型是框架特有的支持自动判断当前请求类型的变量获取方式，例如：
+
+echo I('param.id');
+
+如果当前请求类型是GET，那么等效于 $_GET['id']，如果当前请求类型是POST或者PUT，那么相当于获取 $_POST['id'] 或者 PUT参数id。
+
+由于param类型是I函数默认获取的变量类型，因此事实上param变量类型的写法可以简化为：
+
+I('id'); // 等同于 I('param.id')
+
+I('name'); // 等同于 I('param.name')
+
+3.2.2新增了path和data两个变量类型，用法如下：
+
+path类型变量可以用于获取URL参数（必须是PATHINFO模式参数有效（这个是现在主流的路由方式），无论是GET还是POST方式都有效），例如：
+
+当前访问URL地址是 http://serverName/index.php/New/2013/06/01
+
+那么我们可以通过
+
+echo I('path.1'); // 输出2013
+
+echo I('path.2'); // 输出06
+echo I('path.3'); // 输出01
+
+data类型变量可以用于获取不支持的变量类型的读取，例如：
+
+I('data.file1','','',$_FILES);
+
+ 二、变量过滤
+ 
+  I 函数本身默认的过滤机制是 htmlspecialchars，因为在配置文件中配置了： 把预定义的字符 "<" （小于）和 ">" （大于）转换为 HTML 实体：
+  
+  ">"------&gt; "<"------&lt; "空格"-----&nbsp;
+  
+  浏览器就不会解析成 标签 ，会原样输出 。
+  
+  // 系统默认的变量过滤机制   
+'DEFAULT_FILTER'        => 'htmlspecialchars'    
+
+  我们本身也会在 项目中 common 下面的conf下面的config.php 去设置 过滤  'DEFAULT_FILTER' => 'trim,htmlspecialchars', //I函数默认的过滤函数，
+  
+  
+  设置后，我们在使用：
+  
+  I('get.name');     // 等同于 htmlspecialchars(trim($_GET['name']))
+  
+  
+  在有些特殊的情况下，我们不希望进行任何过滤，即使DEFAULT_FILTER已经有所设置，可以使用：
+
+// 下面两种方式都不采用任何过滤方法I('get.name','','');I('get.id','',false);一旦过滤参数设置为空字符串或者false，即表示不再进行任何的过滤。
+
+
+  
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+
+
+    replaceChild()
+
+该方法用一个新节点替换 NodeList 列表中的某个节点。
+
+接收两个参数，第一个是要插入的节点（这个节点可以是文档中某个已存在的节点，或者是创建的新节点），第二个是要替换的节点。
+
+该方法返回被替换的节点。
+
+
+//代码
+<ul id="words"><li>新年快乐</li><li>万事如意</li><li>最后祝你新年大吉吧</li></ul>
+
+//页面显示
+    新年快乐
+    万事如意
+    最后祝你新年大吉吧
+
+var words = document.getElementById("words");    //获得对 id="words" 的 ul 元素的引用 
+var addLi = document.createElement("li");    //创建 li 元素
+var liText = document.createTextNode("我是新增项，替换了原列表的第项");    //创建 li 元素的文本内容
+addLi.append(liText);    //给 li 元素添加文本内容
+words.replaceChild(addLi, words.childNodes[1]);    //用新建 li 元素替换了原列表中第二项
+
+//刷新页面
+    新年快乐
+    我是新增项，替换了原列表的第二项
+    最后祝你新年大吉吧 

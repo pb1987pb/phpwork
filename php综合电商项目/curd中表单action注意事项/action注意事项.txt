@@ -1,0 +1,25 @@
+
+
+  add  提交表单 ，这里有一个  action  ，__SELF__ 和__ACTION__ 这里面用哪一个都无所谓都可以
+  
+          <form enctype="multipart/form-data" action="__SELF__" method="post">
+
+		  
+   那么在提交的时候，也是用哪一个都无所谓
+   
+    <form enctype="multipart/form-data" action="__ACTION__ " method="post">
+	
+	
+	但是 在  列表的时候 ，这个就要注意了，尽量用 __ACTION__，不是使用 __SELF__ 。
+	
+	   列表中往往 有一个 搜索的  表单，那么在这个表单中我们也会提交数据 去 搜索
+	
+	   因为如果我们使用   __SELF__ ，那么此时就会记住  当前 分页 的页面 。
+	   
+	     但是 按照 搜索条件 ，可以搜索出几条记录 ，但是 
+		 
+		   因为 翻页的 缘故 ，在 用
+		   
+		    ->limit($page->firstRow.','.$page->listRows)
+			
+			 去筛选完的时候，确没有数据，会造成 永远搜索不出来的情况 ，所以这里我们需要慎重 。

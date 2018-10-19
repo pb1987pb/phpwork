@@ -1,0 +1,24 @@
+
+
+    removeChild()
+
+该方法移除 NodeList 列表中的某个节点。
+
+接收一个参数，即要移除的节点。
+
+返回移除的节点。
+
+ //代码
+<ul id="words"><li>新年快乐</li><li>万事如意</li><li>最后祝你新年大吉吧</li></ul>
+
+//页面显示
+    新年快乐
+    万事如意
+    最后祝你新年大吉吧
+
+var words = document.getElementById("words");    //获得对 id="words" 的 ul 元素的引用 
+words.removeChild(words.firstChild);    //移除原列表的第一项
+
+//刷新页面
+    万事如意
+    最后祝你新年大吉吧

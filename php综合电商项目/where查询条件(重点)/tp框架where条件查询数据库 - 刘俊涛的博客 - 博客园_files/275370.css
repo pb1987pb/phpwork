@@ -1,0 +1,8 @@
+#blogTitle{background: url(https://files.cnblogs.com/files/lovebing/title-yellow.gif)  no-repeat center 21px;}
+/**mouse**/
+body {
+	cursor: url(https://files.cnblogs.com/files/lovebing/mouse.gif), auto;
+}
+a:hover {
+	cursor: url(https://files.cnblogs.com/files/lovebing/hand.gif), auto;
+}

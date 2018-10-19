@@ -1,0 +1,83 @@
+
+
+ 文件包含
+ 
+ 在实际开发的时候一般情况会把网站的公共部分，如头部、尾部等部分可以单独的存放到一个文件中，在后期的时候可以直接引入该部分，
+ 
+ 在后期维护的时候只需要维护一份代码就可以；如果说首尾等公共部分不单独拿出来，会造成2个问题，一个是代码重复，
+ 
+ 再者就是在后期维护的时候很麻烦。
+ 
+ 
+ 在ThinkPHP中系统提供了一个模版标签，可以让我们引入一些公共部分的代码文件，这个标签是include标签：
+	<include file=’需要引入的模版文件’ />
+	
+说明：路径可以是相对路径，但是相对于入口文件的(相对于index.php文件来说的)。
+
+案例：使用include的标签语法，来实现页面的首尾引入效果。
+
+
+先创建出三个模版文件（顶部、body、尾部）：
+
+  <include file="./Application/Home/View/default/Public/header.html" />
+  
+  
+   当然这样子的文件名称可以很麻烦，可以用表达式 。
+   
+   模版表达式的定义规则为：模块@主题/控制器/操作
+   
+   
+   <include file=’View目录名/模版文件名’ />    
+   
+    <include file="Test/foot" />   //省略的就是说在当前的这个 View 视图下面的 Test 文件夹下面的 foot.html模板。
+	
+	
+	  可以一次包含多个模版，例如：
+
+<include file="Public/header,Public/menu" />
+
+    也可以多次包含，多次用 include
+	
+	  
+   <include file="Public/header,Public/menu" />
+   
+    <div>我是内容部分</div>
+	
+	 <include file="Public/foot" />
+	
+	
+	传入参数
+无论你使用什么方式包含外部模板，Include标签支持在包含文件的同时传入参数，例如，
+
+下面的例子我们在包含header模板的时候传入了title和keywords变量：
+
+<include file="Public/header" title="ThinkPHP框架" keywords="开源WEB开发框架" />
+
+
+就可以在包含的header.html文件里面使用title和keywords变量，如下：
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>[title]</title><meta name="keywords" content="[keywords]" /></head>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   

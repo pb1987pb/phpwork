@@ -1,0 +1,28 @@
+
+
+          <?php if($goodcatData): ?>
+                      <td class="catwrap">
+                           <?php foreach ($goodcatData as $k1 => $v1): ?>
+                        <select name="cat_id[]" class="cat">
+						<option value="">选择扩展分类</option>
+						<?php foreach ($parentData as $k => $v): ?>	
+                                                <option <?php echo $v['id']==$v1['category_id']?'selected="selected"':'' ?>  value="<?php echo $v['id']; ?>"><?php echo str_repeat('-', 8*$v['level']).$v['catename']; ?></option>
+						<?php endforeach; ?>					
+                                        </select>
+                          <?php endforeach; ?>
+                    </td>
+                      <?php else: ?>
+                         <td class="catwrap">
+                        <select name="cat_id[]" class="cat">
+						<option value="">选择扩展分类</option>
+						<?php foreach ($parentData as $k => $v): ?>	
+                                                <option   value="<?php echo $v['id']; ?>"><?php echo str_repeat('-', 8*$v['level']).$v['catename']; ?></option>
+						<?php endforeach; ?>					
+                                        </select>
+    
+                    </td>
+                     <?php endif; ?>
+					 
+					 
+					 
+					 

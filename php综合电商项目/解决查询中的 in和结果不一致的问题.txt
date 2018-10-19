@@ -1,0 +1,19 @@
+
+
+    比如  $oldData  顺序是   [2,7,1,5,9]
+	
+	    但是我们按照 这个 in 去查询  ，结果是  相对于的  1,2,5,7,9 的顺序的 数据
+	
+	   我们想要查询出来的顺序  也是  对应的   2 ，7,1,5,9   ，那么我们就需要 这样子写   
+
+
+    	   order("FIELD(id,$oldData)")   这里要用 双引号 ，因为是 变量 
+ 
+
+       $oldData=  implode(',', $oldData);      // 先必须 转换为字符串
+   
+    // 解决 查询中的 in和结果不一致的问题
+            $this->where(array(
+                'id' => array('in',$oldData),
+                 'is_on_sale' => array('eq','是'),
+            ))->order("FIELD(id,$oldData)")->select();

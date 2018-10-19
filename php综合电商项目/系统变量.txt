@@ -1,0 +1,59 @@
+
+ 
+   系统变量
+   
+   普通的模板变量需要首先赋值后才能在模板中输出，但是系统变量则不需要，可以直接在模板中输出，系统变量的输出通常以{$Think 打头，例如：
+
+ 在ThinkPHP中系统提供了以下几个系统级别的变量（超全局变量在模版中的使用）：
+?	$Think.server	等价于$_SERVER，获取服务器的相关信息
+?	$Think.get		等价于$_GET，获取get请求的信息
+?	$Think.post	等价于$_POST，获取post请求中的信息
+?	$Think.request	等价于$_REQUEST，获取get和post中信息
+?	$Think.cookie	等价于$_COOKIE，获取cookie中的信息
+?	$Think.session	等价于$_SESSION，获取session中的信息
+?	$Think.config	获取ThinkPHP中所有配置文件的一个总和，如果后面指定了元素，则获取指定的配置
+
+上述7个系统变量的语法都是一样的，在模版中使用的语法格式是：
+	{$Think.xxx.具体的元素下标}
+
+	  {$Think.server.script_name} // 输出$_SERVER['SCRIPT_NAME']变量
+	  
+	  {$Think.session.user_id} // 输出$_SESSION['user_id']变量
+	  
+	  {$Think.get.pageNumber} // 输出$_GET['pageNumber']变量
+	  
+	  {$Think.cookie.name}  // 输出$_COOKIE['name']变量
+	  
+常量输出
+还可以输出常量
+
+{$Think.const.MODULE_NAME}
+
+或者直接使用
+
+{$Think.MODULE_NAME}
+
+配置输出
+输出配置参数使用：
+
+{$Think.config.db_charset}{$Think.config.url_model}语言变量
+输出语言变量可以使用：
+
+{$Think.lang.page_error}{$Think.lang.var_error}	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  

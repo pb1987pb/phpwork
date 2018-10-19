@@ -1,0 +1,103 @@
+
+
+  在 查询 商品分类的时候 ，有一个主分类 和一个 扩展分类
+  
+    那么 在查询的时候 是这个样子查询的  ，
+	
+	
+	// 主分类的情况
+                    $parentModel = D('GoodCategory');
+		$children = $parentModel->getChildren($cateid);
+                $children[]=$cateid;
+                //主分类下的id 集合
+                  $idArr=$this->field('id')->where(array('category_id'=>array('in',$children)))
+                         ->select();
+                
+                  //  扩展分类下的id
+                 $goodcatModel=D('good_cat');
+                 $idArr2=$goodcatModel->field('distinct good_id id')->where(array('category_id'=>array('in',$children)))
+                         ->select();
+						 
+						 
+		那么在这里分别的得到的是 两个 二维数组 ,类似下面这样子。
+
+
+   array(6) {
+  [0] => array(1) {
+    ["id"] => string(2) "22"
+  }
+  [1] => array(1) {
+    ["id"] => string(2) "23"
+  }
+  [2] => array(1) {
+    ["id"] => string(2) "25"
+  }
+  [3] => array(1) {
+    ["id"] => string(2) "29"
+  }
+  [4] => array(1) {
+    ["id"] => string(2) "30"
+  }
+  [5] => array(1) {
+    ["id"] => string(2) "31"
+  }
+}
+array(3) {
+  [0] => array(1) {
+    ["id"] => string(2) "29"
+  }
+  [1] => array(1) {
+    ["id"] => string(2) "30"
+  }
+  [2] => array(1) {
+    ["id"] => string(2) "31"
+  }
+}		
+
+   那么其实 这里 个人 得到的仅仅是一个一维数组  一维数组里面记录了不同的 id值 。
+   
+   那么这里有一个方法。  先合并，在去重。
+   
+       因为这里面都是 数字作为下标，所以不会覆盖，会全部重建索引，就是累加数组 。会有 9个一维数组组成的二维数组 。
+
+        private function getAllid($cateid){
+             //主分类的情况
+                    $parentModel = D('GoodCategory');
+		$children = $parentModel->getChildren($cateid);
+                $children[]=$cateid;
+                //主分类下的id 集合
+                  $idArr=$this->field('id')->where(array('category_id'=>array('in',$children)))
+                         ->select();
+                
+                  //  扩展分类下的id
+                 $goodcatModel=D('good_cat');
+                 $idArr2=$goodcatModel->field('distinct good_id id')->where(array('category_id'=>array('in',$children)))
+                         ->select();
+     
+               $idArr=array_merge($idArr,$idArr2);
+			   
+			   //  去除重复的数组。
+			   
+               $newidArr=array();//设置一个空数组
+               foreach ($idArr as $k=>$v){
+                   if(!in_array($v['id'],$newidArr))
+                           $newidArr[]=$v['id'];
+               }
+			   
+			   
+               return $newidArr;
+            
+        }
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+

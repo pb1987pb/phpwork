@@ -1,0 +1,70 @@
+
+
+  ThinkPHP  中
+  
+    convention.php 是主要的配置文件   ，90% 的配置都在这里面 ，范围是 最大的 
+
+
+     这几个就是列举一些简单的配置:
+
+	 //访问分组设置：
+	 
+    'DEFAULT_MODULE'        =>  'Home',  // 默认模块
+    'DEFAULT_CONTROLLER'    =>  'Index', // 默认控制器名称
+    'DEFAULT_ACTION'        =>  'index', // 默认操作名称
+
+	 //路由设置：
+	 
+     'URL_MODEL'             =>  1,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
+    // 0 (普通模式); 1 (PATHINFO 模式); 2 (REWRITE  模式); 3 (兼容模式)  默认为PATHINFO 模式
+    'URL_PATHINFO_DEPR'     =>  '/',	// PATHINFO模式下，各参数之间的分割符号
+	
+	    如果我们需要修改这里面的设置，那么我们不要在这里面去直接修改，我们必须去 自己的 项目里面 config.php 文件去修改 。
+		
+		
+		类似 
+		
+		return array(
+    'DB_TYPE' =>  'mysql',     // mysql,mysqli,pdo
+    'DB_DSN'    => 'mysql:host=localhost;dbname=php39;charset=utf8',
+    'DB_USER' =>  'root',      // 用户名
+    'DB_PWD' =>  'root',          // 密码
+    'DB_PORT' =>  '3306',        // 端口
+    'DB_PREFIX' =>  'p39_',    // 数据库表前缀
+    'DB_HOST' =>  'localhost', // 服务器地址
+    'DB_NAME' =>  'php39',          // 数据库名
+    'DB_CHARSET' =>  'utf8',      // 数据库编码默认采用utf8
+    'DEFAULT_FILTER' => 'trim,htmlspecialchars', //I函数默认的过滤函数
+    
+    /************ 图片相关的配置 ***************/
+    'IMAGE_CONFIG' => array(
+    	'maxSize' => 1024*1024,//定义图片上传不能超过 1MB
+    	'exts' => array('jpg', 'gif', 'png', 'jpeg'),
+  	'rootPath' => './Public/Uploads/',  // 上传图片的保存路径  -> PHP要使用的路径，硬盘上的路径
+  	'viewPath' => '/Public/Uploads/',   // 显示图片时的路径    -> 浏览器用的路径，上线之后也可以写成类似http://www.39.com/Public/Uploads/
+    ),
+);
+
+       那么一旦这样子设置了配置 ，在 .php 中怎么获取这些配置的值？
+	   
+	       用 C 函数 获取 值 。
+		   
+		   
+		    $savePath = C('IMAGE_CONFIG');  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

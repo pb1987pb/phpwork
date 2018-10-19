@@ -1,0 +1,23 @@
+
+
+
+ php 处理数字为金钱格式
+ 
+ number_format(需要转换的数字,保留小数个数,小数点符号,每三位的分隔符)
+ 
+echo number_format("1000000")."<br>"; //默认显示：1,000,000
+
+echo number_format("1000000",2)."<br>";//默认显示：1,000,000.00
+
+echo number_format("1000000",2,".",""); //自定义显示：1000000.00
+
+
+
+   这样子处理的结果是    2,550.00    ，这样子的 前端对 千分位的不是很好操作 
+
+  那么这样子的对前端操作就很好了
+
+<td class="col5">￥<span><?php $xj = $v['price'] * $v['goods_number'];echo number_format($xj,2,".",""); ?></span></td>
+
+
+ 

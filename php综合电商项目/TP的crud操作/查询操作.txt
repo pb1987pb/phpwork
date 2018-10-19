@@ -1,0 +1,51 @@
+
+
+查询操作
+
+
+Mysql中查询操作使用的语法是：select语句。
+
+在ThinkPHP中系统封装了方法可以直接用于查询：select方法、find方法。
+
+Select方法语法：
+	$model -> select();			表示查询全部的信息
+	
+	$model -> select(id);		表示查询指定id的信息
+	
+	$model -> select(‘id1,id2,id3,id4….’);	表示查询指定id集合的信息，等价于mysql中in语句
+	
+
+Find方法语法：
+	$model -> find();		表示查询当前表中的第一条记录，相当于limit 1;
+	
+	$model -> find(id);		表示查询表中的指定id的记录；
+	
+
+返回值：
+
+	Select方法返回值是一个二维数组，即时查询的是一条记录返回也是二维数组；find返回值是一维数组。
+
+          没有查询到那么返回的都是空数组 。
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	

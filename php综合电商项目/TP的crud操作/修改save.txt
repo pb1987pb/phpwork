@@ -1,0 +1,49 @@
+
+   在mysql中修改操作使用的是：update table语句。
+在ThinkPHP中使用的是save方法，语法格式：
+	$model -> save(一维关联数组);
+条件需要一维关联数组必须要有主键信息。如果没有主键信息，则相当于批量修改，在ThinkPHP中，系统为了防止误操作，不允许批量修改
+
+
+   和 add一样
+   
+   如果在save之前已经创建数据对象的话（例如使用了create或者data方法），save方法就不需要再传入数据了。
+   
+    	if(IS_POST)
+    	{
+    		if($model->create(I('post.'), 2))
+    		{       
+    			if($model->save() !== FALSE)
+    			{
+    				$this->success('修改成功！', U('lst'));
+    				exit;
+    			}
+    		}
+    		$this->error('修改失败！原因：'.$model->getError());
+    	}
+		
+		
+		  注意：如果此时没有传递 id ,那么 则返回值是false
+		  
+		  
+		    返回false，表示修改操作并没有执行，而不是指mysql执行失败。
+			
+			
+			修改操作必须判断  if($model->save() !== FALSE)
+			
+			  因为正常操作会返回 int 类型的，表示受影响的行数 。 但是 有时候我们什么数据也没有修改就提交修改了，那么
+			  
+			  
+	 此时返回的受影响的行数就是   0 ，0 也表示是成功的 ，所以必须判断是否是 false才可以 。
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

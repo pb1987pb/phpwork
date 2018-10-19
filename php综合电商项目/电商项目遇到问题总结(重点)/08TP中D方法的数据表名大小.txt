@@ -1,0 +1,67 @@
+
+
+
+http://www.thinkphp.cn/topic/35143.html
+
+
+D('User')和D('user')没有区别，M('User')和M('user')也没有区别
+
+但是D('UserUser')和D('useruser')就有区别了
+
+
+（模型名第一个字母大小写都没有关系，中间的字母大小写有关系）
+
+functions中有一个函数parse_name，不管是D方法还是M方法，最终连接数据库都需要把名字经过这个函数处理
+主要是：return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+这段代码总共分3个小部分：
+
+
+
+$name = preg_replace("/[A-Z]/", "_\\0", $name);
+$name = trim($name, "_");
+return strtolower($name);
+
+第一个部分，将大写字幕A-Z前面添加下划线
+如：User > _User , UserUser > _User_User
+
+
+第二个部分，去除两边的下划线
+如：_User > User , _User_User > User_User
+
+第三个部分，转换为小写
+如：User > user , User_User >user_user
+
+
+也就是说，大写字幕的左边会加一个下划线并转换为小写，而且两边的下划线会被去除，所以第一个字幕是大写还是小写都没有关系，
+
+但是中间的大写就不一样了所以config中，表前缀都是带有下划线的，如有两张表：think_user和think_user_user
+config中配置表前缀为think_,
+
+然后使用D('User')和D('user')都能连接think_user表，但是想要连接think_user_user表，则只能用D('userUser')或D('UserUser')，而不能用D('useruser')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

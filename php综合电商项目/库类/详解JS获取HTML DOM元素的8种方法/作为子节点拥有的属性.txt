@@ -1,0 +1,36 @@
+
+
+ 作为子节点有用的属性
+ 
+ parentNode  该属性返回子节点的父节点。
+ 
+   
+   
+     <p>快过年了，说点什么好呢？</p>
+<ul>
+    <li>新年快乐</li>
+    <li>万事如意</li>
+    <li id="djb">最后祝你新年大吉吧</li>
+</ul>
+
+var djb = document.getElementById("djb");    //获得对 id="djb" 的 li 元素的引用 
+alert(djb.parentNode.nodeName);              //"UL"
+
+
+previousSibling  该属性返回 childNodes 列表中该子节点的上一个同胞节点。=-------------------》是上一个同胞节点
+
+  <p>快过年了，说点什么好呢？</p>
+<ul><li>新年快乐</li><li id="ruyi">万事如意</li><li>最后祝你新年大吉吧</li></ul>
+
+var ruyi = document.getElementById("ruyi");          //获得对 id="ruyi" 的 li 元素的引用 
+alert(ruyi.previousSibling.firstChild.nodeValue);    //"新年快乐"
+
+
+nextSibling   该属性返回 childNodes 列表中该子节点的下一个同胞节点。
+
+
+  <p>快过年了，说点什么好呢？</p>
+<ul><li>新年快乐</li><li id="ruyi">万事如意</li><li>最后祝你新年大吉吧</li></ul>
+
+var ruyi = document.getElementById("ruyi");    //获得对 id="ruyi" 的 li 元素的引用 
+alert(ruyi.nextSibling.firstChild.nodeValue);    //"最后祝你新年大吉吧"

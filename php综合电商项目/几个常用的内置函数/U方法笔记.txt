@@ -1,0 +1,94 @@
+
+
+大 U 函数 是我们经常用的，那么 在 生成  链接 的时候 的时候 要注意什么 。
+  
+    大 U 函数  里面 还可以传递平台进去，一般这个情况很少   U('Gii/Index/index')   ==》   /index.php/Gii/Index/index.html  
+	
+	
+	php中的大U函数三个参数：
+		U('ajaxDelPic')           当前平台，当前控制器，就传递一个方法      ==>   /index.php/Admin/Goods/ajaxDelPic.html
+		
+		U('ajaxDelPic','',FALSE)                    ==>   /index.php/Admin/Goods/ajaxDelPic
+		
+		U('ajaxDelPic?id=1')                        ==>   /index.php/Admin/Goods/ajaxDelPic/id/1.html
+		
+		//当前平台，控制器和方法不一样
+		
+		U('User/add') // 生成User控制器的add操作的URL地址
+		
+		U('Blog/read?id=1') // 生成Blog控制器的read操作 并且id为1的URL地址
+		
+		U('Admin/User/select') // 生成Admin模块的User控制器的select操作的URL地址
+		
+		
+		但是不允许使用下面的定义方式来传参数
+		
+		U('Blog/cate/cate_id/1/status/1');   ×××××××××××××××××××××
+		
+		
+		U('ajaxDelPic', array('id'=>1))             ==>   /index.php/Admin/Goods/ajaxDelPic/id/1.html
+		
+		U('ajaxDelPic', array('id'=>1), FALSE)      ==>   /index.php/Admin/Goods/ajaxDelPic/id/1
+		
+		
+		
+		   实际例子
+		   
+             1，在 html 里面  a中的 应用 
+		   
+		         <a href="<?php echo U('delete?id='.$v['id'].'&p='.I('get.p')); ?>">编辑</a> |
+
+		          <a href="<?php echo U('delete?id='.$v['id'].'&p='.I('get.p')); ?>">移除</a>|
+		
+		   2,在 html 中 ajax中的 应用  ，这个应用需要注意 ，因为参数是后来才有的，不是 php中就知道的
+		   
+		            所以在这里面我们必须使用  url : "<?php echo U('ajaxDelPic', '', FALSE); ?>/picid/"+pid,  来拼接后来的参数
+			  
+			   	  // 删除图片
+$(".btn_del_pic").click(function(){
+	if(confirm('确定要删除吗？'))
+	{
+		// 先选中删除按钮所在的li标签
+		var li = $(this).parent();
+		// 从这个按钮上获取pic_id属性
+		var pid = $(this).attr("pic_id");
+
+		$.ajax({
+			type : "GET",
+			url : "<?php echo U('ajaxDelPic', '', FALSE); ?>/picid/"+pid,
+			success : function(data)
+			{
+				// 把图片从页面中删除掉
+				li.remove();
+			}
+		});
+	}
+});
+		  3， 在  .php 中的常规应用 ，多数是跳转
+
+           		  $this->success('删除成功！', U('lst'));
+			   
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+		
+		
+		
+		
+		
+		
+		
+		
+		

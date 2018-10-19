@@ -1,0 +1,64 @@
+
+
+<link href="./Admin/Styles/general.css" rel="stylesheet" type="text/css" />
+
+
+ 在html里面引入js或者css等外部文件的时候，尤其是在 tp 框架的 pathinfo 路由下面 ，不要用这种相对路径
+ 
+ 
+ 在模板的 html中 写 相对路径就是相当于 index.php的 ，但是这里 因为 受  pathinfo 路由 影响，那么会认为这个
+ 
+ 路径是  http://www.shop.com/index.php/Home/Index  ，然后在拼接一下就成了 。
+ 
+   
+    http://www.shop.com/index.php/Home/Index/Admin/Styles/general.css
+	
+	而不是我们想象的    http://www.shop.com/Admin/Styles/general.css
+	
+	
+	  那么此时应该怎么办 ？
+	  
+	  我们必须使用网站根目录 ，也就是  http://www.shop.com ，在html中是  '/'
+	  
+	  <link href="/Admin/Styles/general.css" rel="stylesheet" type="text/css" />
+	  
+	  
+	   文件引入
+	   
+	   css等静态资源文件被模板文件引入
+	   
+	   index.php --->IndexController-->index.html-->style.css
+	   
+	   相对路径设置：相对index.php设置
+	   
+	   以上4个文件，前三个文件 index.php --->IndexController-->index.html  最后要生成一个 混编文件 ，
+	   
+	   最后是这个混编文件引入的css,改混编文件是 index.php发起执行的。
+	   
+	    因此css 文件相对 index.php 进行设置
+		
+		
+		css文件本身引入 img图片
+		
+		style.css-->img图片
+		
+		相对路径方式：非常灵活，编码代码少
+		
+		相对css本身设置 ：因为 css  文件需要浏览器发送 “独立” 的请求给请求回来。
+		
+		           css文件和 img图片是一个单位的 。
+		
+		
+		
+     
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

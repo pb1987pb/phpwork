@@ -1,0 +1,60 @@
+
+   SQL提供了一系列统计函数
+Count(字段名/*): 统计分组后的记录数: 每一组有多少记录
+Max(字段名):	统计每组中最大的值
+Min(字段名): 统计最小值
+Avg(字段名): 统计平均值
+Sum(字段名): 统计和
+
+  其他的统计函数，必须 传递 字段名
+  
+ Count函数: 里面可以使用两种参数: *代表统计记录,
+ 
+      字段名代表统计对应的字段(NULL不统计)   ***   这个必须要要注意 
+	  
+	  
+	  ****使用这些函数时，如果数据库中没有数据，count返回0，其他的返回null；
+	  
+	2，  concat  连接字符串 ， concat 函数可以连接一个或者多个字符串，则返回 null
+
+       select concat('11','22','33')
+	    
+		  concat('11','22','33')
+		  112233
+		  
+	3,	  concat_ws  是字符串用符号相连接。
+	
+	
+       select concat_ws(',','22','33')   后面的字符串用 ',' 相连接。
+	    
+		  concat(',','22','33')
+		  22,33
+	    
+		  和 concat 区别 ，concat_ws 如果前面的 符号是 null,则结果是null
+		  
+		                  如果 分隔符号是 不是null，后面的字符串是null, 那么就会忽略后面的null值 ，一样的去连接。
+						  
+						  
+	4，group_concat(字段)	,必须是分组之后的数据	,默认的分隔符号是 ','
+
+     完整语法  group_concat([distinct] 要连接的字段 [order by asc/desc 排序字段] [separator '分隔符'])	
+		
+		
+		select id,group_concat(name) from aa group by id     *** 没有 distinct 的 ，默认 用逗号分隔
+		
+		  id  group_concat(name)
+		  1     10,20,20
+		  2      20   
+		
+		select id,group_concat(distinct name separator ';') from aa group by id     *** 没有 distinct 的 ,用';'分隔
+		
+		  id  group_concat(name)
+		  1     10;20
+		  2      20   
+		
+		
+		
+		
+		
+		
+	  

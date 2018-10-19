@@ -1,0 +1,26 @@
+
+
+执行计划explain
+
+
+针对查询语句设置执行计划，当前数据库只有查询语句支持执行计划。
+每个select查询sql语句执行之前，需要把该语句需要用到的各方面资源都计划好
+例如：cpu资源、内存资源、索引支持、涉及到的数据量等资源
+查询sql语句真实执行之前所有的资源计划就是执行计划。
+
+我们讨论的执行计划，就是看看一个查询sql语句是否可以使用上索引。
+  
+  在  cmd 命令下 ，先  use 数据库 进入 
+
+具体操作：
+explain  查询sql语句\G    
+一条sql语句在没有执行之前，可以看一下执行计划。
+explain select * from pan_goods where id =18\G
+
+ 也可以去  数据库的界面 用   explain select * from pan_goods where id =18; 查看
+ 
+ 
+   里面有  两个字段 possible_keys  表示 可能用到的索引字段
+   
+                               key   表示真实情况下用到的字段
+   

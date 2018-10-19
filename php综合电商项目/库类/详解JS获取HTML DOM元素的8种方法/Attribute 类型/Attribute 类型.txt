@@ -1,0 +1,162 @@
+
+
+   Attribute 类型
+
+Attributes 属性包含一个 NamedNodeMap 对象，与 NodeList 类似，是一个动态集合。
+
+一个元素的所有属性节点都在这个集合中。 
+
+NamedNodeMap 对象有 length 属性，即一个元素所有属性的个数。 
+
+5.1 属性
+
+name
+
+该属性返回指定属性的名称。
+
+value
+
+该属性返回指定属性的值。
+
+specified
+
+该属性值是布尔值。
+
+如果在文档中设置了属性值，则返回 true，如果是 DTD/Schema 中的默认值，则返回 false。
+
+length
+
+返回属性列表中属性节点的个数。
+
+复制代码
+<p id="myP" class="para" title="text">Some Text</p>
+
+var p =document.getElementById("myP");
+
+console.log(p.attributes.length);    //3
+
+console.log(p.attributes[1]);    //返回属性列表中第二个属性对象
+console.log(p.attributes[1].name);    //"class"   
+console.log(p.attributes[1].value);    //"para"
+
+console.log(p.attributes["class"]);    //返回属性列表中第二个属性对象
+console.log(p.attributes["class"].name);    //"class" 返回属性列表中第二个属性对象的名称    
+console.log(p.attributes["class"].value);    //"para"
+
+console.log(p.attributes[1].specified);    //"true"
+复制代码
+5.2 方法
+
+getNamedItem()
+
+接收一个参数，即想要返回的属性节点的属性名称。
+
+返回指定属性名称的属性节点。
+
+复制代码
+<p id="myP" class="para" title="text">Some Text</p>
+
+var p =document.getElementById("myP");
+
+console.log(p.attributes.getNamedItem("class"));    //返回属性列表中 class 属性节点
+console.log(p.attributes.getNamedItem("class").name);    //"class"   
+console.log(p.attributes.getNamedItem("class").value);    //"para"
+
+//再来回顾前两种访问属性节点列表中某个属性节点的方法
+
+//方括号里面跟索引号
+console.log(p.attributes[1]);    //返回属性列表中第二个属性节点
+console.log(p.attributes[1].name);    //"class"   
+console.log(p.attributes[1].value);    //"para"
+
+//方括号里面跟属性名称
+console.log(p.attributes["class"]);    //返回属性列表中 class 属性节点
+console.log(p.attributes["class"].name);    //"class"   
+console.log(p.attributes["class"].value);    //"para"
+复制代码
+removeNamedItem()
+
+接收一个参数，即想要删除的属性节点的属性名称。
+
+返回删除的指定属性名称的属性节点。
+
+<p id="myP" class="para" title="text">Some Text</p>
+
+var p =document.getElementById("myP");
+alert(p.attributes["title"]);    //返回属性 title 节点
+p.attributes.removeNamedItem("title");    //移除 title 属性节点
+alert(p.attributes["title"]);    //"undifined"
+
+
+
+setNamedItem()
+
+该方法向 NamedNodeMap 列表中添加或替换指定的属性节点。
+
+接收一个参数，即要添加的向 NamedNodeMap 列表中添加或替换指定的属性节点。
+
+如果此节点已存在，则将替换该节点，并返回被替换的节点，否则返回值是 null。
+
+复制代码
+//p 元素有2个属性节点
+<p id="myP" class="para">Some Text</p>
+
+var p =document.getElementById("myP");
+alert(p.attributes.length);    //"2"
+var attrT = document.createAttribute("title");    //创建属性节点 title
+attrT.value = "text";    //给 title 节点赋值
+p.attributes.setNamedItem(attrT);    //给 p 元素的属性列表中添加 title 属性节点
+
+//检测添加的属性节点
+alert(p.attributes.length);    //"3"
+alert(p.attributes["title"].value);    //"text"
+复制代码
+一般开发人员用的最多的是 getAttribute()，setAttribute()，removeAttribute() 这些方法。
+
+item()
+
+接收一个参数，即想要访问的属性节点的索引数值。
+
+返回位于指定索引的属性节点。
+
+复制代码
+<p id="myP" class="para" title="text">Some Text</p>
+
+var p =document.getElementById("myP");
+console.log(p.attributes.item(1));    //返回属性列表中第二个属性节点
+console.log(p.attributes.item(1).name);    //"class"   
+console.log(p.attributes.item(1).value);    //"para"
+
+
+//再来回顾前三种访问属性节点列表中某个属性节点的方法
+
+//方括号里面跟索引号
+console.log(p.attributes[1]);    //返回属性列表中第二个属性节点
+console.log(p.attributes[1].name);    //"class"   
+console.log(p.attributes[1].value);    //"para"
+
+//方括号里面跟属性名称
+console.log(p.attributes["class"]);    //返回属性列表中 class 属性节点
+console.log(p.attributes["class"].name);    //"class"   
+console.log(p.attributes["class"].value);    //"para"
+
+//geyNamedItem()里跟属性名称
+console.log(p.attributes.getNamedItem("class"));    //返回属性列表中 class 属性节点
+console.log(p.attributes.getNamedItem("class").name);    //"class"   
+console.log(p.attributes.getNamedItem("class").value);    //"para"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

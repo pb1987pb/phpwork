@@ -1,0 +1,90 @@
+
+
+ 作为父节点拥有的属性
+
+ childNodes
+
+该属性返回一个 NodeList 对象。
+
+ NodeList 对象是一种类数组对象，保存着一组有序的节点，可以通过方括号语法和 item() 方法访问 NodeList 对象中的项。
+ 
+ <ol id="rank">
+    <li>第一名：张水水</li>
+    <li>第二名：黄糊糊</li>
+    <li>第三名：安莘婉</li>
+</ol>
+
+var rank = document.getElementById("rank");    //获取 ol 元素
+alert(rank.childNodes.length);    //"7",返回 ol 元素的子节点个数
+
+有的浏览器会把元素之间的空白处算作一个文本节点。
+
+本例中 ol 元素后面的空白处（1个）和 li 元素后面的空白处（3个），算作文本节点，于是这4个空白文本节点加上3个 li 元素节点，一共是7个，所以 rank.childNodes.length 返回7。
+
+但是，如果把上例中所有元素紧密相接，互相之间不留空白，则 length 值会不一样。
+
+ //元素之间不留空白
+<ol id="rank"><li>第一名：张水水</li><li>第二名：黄糊糊</li><li>第一名：安莘婉</li></ol>
+
+var rank = document.getElementById("rank");    //取得对 ol 元素的引用
+alert(rank.childNodes.length);    //f返回 "3"
+
+
+firstChild
+
+该属性返回父节点的第一个子节点。
+ 
+
+<ol id="rank"><li>第一名：张水水</li><li>第二名：黄糊糊</li><li>第三名：安莘婉</li></ol>
+ 
+ var rank = document.getElementById("rank");    //取得对 ol 元素的引用
+alert(rank.firstChild);       //返回第一个 li 元素
+alert(rank.childNodes[0]);    //返回第一个 li 元素
+ 
+   someNode.firstChild = someNode.childNodes[0]
+  
+  =====要获取里面的值的话，那么就要这样子做
+  
+   上例中返回的是第一个 li 元素，即 <li>第一名：张水水</li>，要获得第一个 li 元素的文本内容：第一名：张水水，可以用下面的方法。
+   
+   <ol id="rank"><li>第一名：张水水</li><li>第二名：黄糊糊</li><li>第三名：安莘婉</li></ol>
+
+var rank = document.getElementById("rank");        //取得对 ol 元素的引用
+alert(rank.firstChild.firstChild.nodeValue);       //"第一名：张水水"
+alert(rank.childNodes[0].firstChild.nodeValue);    //"第一名：张水水"
+ 
+ 
+ lastChild
+
+该属性返回父节点的最后一个子节点。
+
+<ol id="rank"><li>第一名：张水水</li><li>第二名：黄糊糊</li><li>第三名：安莘婉</li></ol>
+
+var rank = document.getElementById("rank");        //取得对 ol 元素的引用
+
+alert(rank.lastChild);                                 //返回最后一个 li 元素
+alert(rank.childNodes[rank.childNodes.length - 1]);    //返回最后一个 li 元素
+
+alert(rank.lastChild.firstChild.nodeValue);                                 //"第三名：安莘婉"
+alert(rank.childNodes[rank.childNodes.length - 1].firstChild.nodeValue);    //"第三名：安莘婉"
+复制代码
+someNode.lastChild = someNode.childNodes[someNode.childNodes.length - 1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

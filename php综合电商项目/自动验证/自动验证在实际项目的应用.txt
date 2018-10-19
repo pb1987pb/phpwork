@@ -1,0 +1,35 @@
+
+
+  protected $_validate = array(
+		array('level_name', 'require', '级别名称不能为空！', 1, 'regex', 3),    //必须验证
+		
+		array('level_name', '1,30', '级别名称的值最长不能超过 30 个字符！', 1, 'length', 3),  //长度限制
+		
+                array('level_name', '', '级别名称已经存在！', 1, 'unique', 3),  // 唯一性验证
+
+                array('repassword','password','确认密码不正确',0,'confirm')
+				
+		array('jifen_bottom', 'require', '积分下限不能为空！', 1, 'regex', 3),
+		array('jifen_bottom', 'number', '积分下限必须是一个整数！', 1, 'regex', 3),  // 整数  定义的 int类型
+	
+	
+	   array('is_on_sale', '是,否', "是否上架的值只能是在 '是,否' 中的一个值！", 2, 'in', 3),     ---下拉或者radio的判断值
+		array('is_delete', '是,否', "是否放到回收站的值只能是在 '是,否' 中的一个值！", 2, 'in', 3), ---下拉或者radio的判断值
+		
+		
+		array('market_price', 'currency', '市场价格必须是货币格式！', 1, 'regex', 3), -- 定义的decimal 或者是 numeric类型
+	);
+
+
+
+     验证条件
+
+          对 第 4个 字段的 说明 ， 一般的情况是  ，这个如果是  非必须 字段  ，那么 用   2  表示  不为空的时候验证 。
+
+                   如果是 必须字段 ，那么就  是  1  ，必须验证 。
+
+                              
+   
+                            
+
+   

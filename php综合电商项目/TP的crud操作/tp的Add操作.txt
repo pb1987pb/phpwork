@@ -1,0 +1,46 @@
+
+在ThinkPHP中系统给我们封装好了模型中的方法，可以通过方法来实现数据的增加操作，这个方法叫做add方法：
+
+  $User = M("User"); // 实例化User对象
+  $data['name'] = 'ThinkPHP';
+  $data['email'] = 'ThinkPHP@gmail.com';
+  $User->add($data);
+  
+  add里面的参数是一维数组，但是必须是 键值（关联）数组，键必须和数据表中字段名要匹配，如果不匹配的那么就是无用数据
+  
+  会在增加的时候被过滤掉。
+  
+   如果在add之前已经创建数据对象的话（例如使用了create或者data方法），add方法就不需要再传入数据了。使用create方法的例子：
+
+  if(IS_POST)
+    	{
+    		$model = D('Goods');
+    		if($model->create(I('post.'), 1))  // create 是创建数据对象的。
+    		{
+    			if($id = $model->add())
+    			{
+    				$this->success('添加成功！', U('lst'));
+    				exit;
+    			}
+    		}
+    		$this->error('添加失败！原因：'.$model->getError());
+    	}
+
+		
+		  add方法我们只需要判断 成功之后 是否 有值就可以了 。
+		  
+		  
+		   一次性增加多个记录怎么办？
+		   
+            1，可以循环使用add方法；		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  

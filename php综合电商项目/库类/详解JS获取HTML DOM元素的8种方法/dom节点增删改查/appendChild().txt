@@ -1,0 +1,31 @@
+
+
+ appendChild()
+
+该方法向 NodeList 列表中的末尾添加一个节点。
+
+接收一个参数，即要添加的节点。
+
+该方法返回新添加的节点。
+
+
+ 复制代码
+//代码
+<ul id="words"><li>新年快乐</li><li>万事如意</li><li>最后祝你新年大吉吧</li></ul>
+
+//页面显示
+    新年快乐
+    万事如意
+    最后祝你新年大吉吧
+
+var words = document.getElementById("words");    //获得对 id="words" 的 ul 元素的引用 
+var addLi = document.createElement("li");    //创建 li 元素
+var liText = document.createTextNode("我是新增项，被放在元列表的末尾处");    //创建 li 元素的文本内容
+addLi.append(liText);    //给 li 元素添加文本内容
+words.appendChild(addLi);    //给 ul 元素添加新建的 li 元素
+
+//刷新页面
+    新年快乐
+    万事如意
+    最后祝你新年大吉吧
+    我是新增项，被放在元列表的末尾处 
